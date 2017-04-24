@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class AssistanceTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(AssistanceTableSeeder::class);
+        DB::table('assistances')->truncate();
+        factory('ProChile\Assistance', 10)->create();
     }
 }

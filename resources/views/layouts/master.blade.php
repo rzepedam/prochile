@@ -1,20 +1,38 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<html>
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ProChile | @yield('title') </title>
+        <link rel="stylesheet" href="{!! asset('css/inspinia.css') !!}" />
+        <link rel="stylesheet" href="{!! asset('css/app.css') !!}" />
+        @yield('css')
     </head>
-    <body>
+    <body class="pace-done skin-3">
+        <div id="wrapper">
 
-        <div id="app" class="container">
-            
-            @yield('content')
+            @include('layouts.sections.sidebar')
+
+            <div id="page-wrapper" class="gray-bg dashbard-1">
+
+                @include('layouts.sections.nav')
+
+                @include('layouts.sections.header')
+
+                <div class="wrapper wrapper-content">
+
+                    @yield('content')
+
+                </div>
+
+                @include('layouts.sections.footer')
+
+            </div>
 
         </div>
+
+        <script src="{!! asset('js/inspinia.js') !!}" type="text/javascript"></script>
+        @yield('scripts')
 
     </body>
 </html>

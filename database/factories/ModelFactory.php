@@ -1,8 +1,13 @@
 <?php
 
-$factory->define(ProChile\Client::class, function (Faker\Generator $faker)
+$factory->define(ProChile\Assistance::class, function (Faker\Generator $faker)
 {
+    $email = $faker->safeEmail;
+
     return [
+        'user_id' => factory('ProChile\User')->create([
+            'email' => $email
+        ])->id,
         'first_name'     => $faker->firstName,
         'male_surname'   => $faker->lastName,
         'female_surname' => $faker->lastName,
@@ -10,7 +15,7 @@ $factory->define(ProChile\Client::class, function (Faker\Generator $faker)
         'company_id'     => factory(\ProChile\Company::class)->create()->id,
         'industry_id'    => factory(\ProChile\Industry::class)->create()->id,
         'phone'          => $faker->e164PhoneNumber,
-        'email'          => $faker->safeEmail
+        'email'          => $email
     ];
 });
 
