@@ -43,27 +43,41 @@ class AssistanceRequest extends FormRequest
         {
             case 'POST':
             {
-                return [
+                $rules = [
+                    'position_id'    => ['required', 'exists:positions,id'],
+                    'city_id'        => ['required', 'exists:cities,id'],
+                    'company_id'     => ['required', 'exists:companies,id'],
+                    'industry_id'    => ['required', 'exists:industries,id'],
+                    'rut'            => ['required', 'unique:assistances,rut'],
                     'male_surname'   => ['required'],
                     'female_surname' => ['required'],
                     'first_name'     => ['required'],
-                    'rut'            => ['required', 'unique:assistances,rut'],
-                    'company_id'     => ['required', 'exists:companies,id'],
-                    'industry_id'    => ['required', 'exists:industries,id'],
+                    'country_id'     => ['required', 'exists:countries,id'],
                     'phone'          => ['required'],
-                    'email'          => ['required', 'email']
+                    'email'          => ['required', 'email', 'unique:assistances,email']
                 ];
+
+                if ( \Request::get('position_id') === 1 )
+                {
+                    $rules['type_assistance_id'] = ['required', 'in:1,2,3'];
+                } else
+                {
+                    $rules['type_assistance_id'] = ['nullable'];
+                }
+
+                return $rules;
             }
 
             case 'PUT':
             {
                 return [
+                    'company_id'     => ['required', 'exists:companies,id'],
+                    'industry_id'    => ['required', 'exists:industries,id'],
+                    'rut'            => ['required', 'unique:assistances,rut,' . $this->route->parameter('assistance')],
                     'male_surname'   => ['required'],
                     'female_surname' => ['required'],
                     'first_name'     => ['required'],
-                    'rut'            => ['required', 'unique:assistances,rut,' . $this->route->parameter('assistance')],
-                    'company_id'     => ['required', 'exists:companies,id'],
-                    'industry_id'    => ['required', 'exists:industries,id'],
+                    'country_id'     => ['required', 'exists:countries,id'],
                     'phone'          => ['required'],
                     'email'          => ['required', 'email', 'unique:assistances,email,' . $this->route->parameter('assistance')]
                 ];

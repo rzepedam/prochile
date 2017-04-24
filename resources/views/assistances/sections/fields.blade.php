@@ -1,4 +1,34 @@
 <div class="row">
+    {{-- Cargo select field --}}
+    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
+    	{{ Form::label('position_id', 'Cargo') }}
+    	{{ Form::select('position_id', $positions, null, ['class' => 'form-control']) }}
+    </div>
+    {{-- Tipo Asistente select field --}}
+    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
+    	{{ Form::label('type_assistance_id', 'Tipo Asistente') }}
+    	{{ Form::select('type_assistance_id', $typeAssistances, null, ['class' => 'form-control']) }}
+    </div>
+    {{-- Lugar Evento select field --}}
+    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
+    	{{ Form::label('city_id', 'Lugar Evento') }}
+    	{{ Form::select('city_id', $cities, null, ['class' => 'form-control']) }}
+    </div>
+    {{-- Empresa select field --}}
+    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
+        {{ Form::label('company_id', 'Empresa') }}
+        {{ Form::select('company_id', $companies, null, ['class' => 'form-control']) }}
+    </div>
+    {{-- Sector Industrial select field --}}
+    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
+        {{ Form::label('industry_id', 'Sector Industrial') }}
+        {{ Form::select('industry_id', $industries, null, ['class' => 'form-control']) }}
+    </div>
+    {{-- Rut text field --}}
+    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
+        {{ Form::label('rut', 'Rut') }}
+        {{ Form::text('rut', null, ['class' => 'form-control']) }}
+    </div>
     {{-- Primer Nombre text field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
         {{ Form::label('first_name', 'Primer Nombre') }}
@@ -14,32 +44,18 @@
         {{ Form::label('female_surname', 'Apellido Materno') }}
         {{ Form::text('female_surname', null, ['class' => 'form-control']) }}
     </div>
-</div>
-<div class="row">
-    {{-- Rut text field --}}
+    {{-- Nacionalidad select field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
-        {{ Form::label('rut', 'Rut') }}
-        {{ Form::text('rut', null, ['class' => 'form-control']) }}
+    	{{ Form::label('country_id', 'Nacionalidad') }}
+    	{{ Form::select('country_id', $countries, null, ['class' => 'form-control']) }}
     </div>
-    {{-- Empresa select field --}}
-    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
-        {{ Form::label('company_id', 'Empresa') }}
-        {{ Form::select('company_id', $companies, null, ['class' => 'form-control']) }}
-    </div>
-    {{-- Sector Industrial select field --}}
-    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
-        {{ Form::label('industry_id', 'Sector Industrial.') }}
-        {{ Form::select('industry_id', $industries, null, ['class' => 'form-control']) }}
-    </div>
-</div>
-<div class="row">
     {{-- Teléfono text field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
         {{ Form::label('phone', 'Teléfono') }}
         {{ Form::text('phone', null, ['class' => 'form-control']) }}
     </div>
     {{-- Email text field --}}
-    <div class="col-xs-12 col-sm-8 col-md- form-group">
+    <div class="col-xs-12 col-sm-6 col-md-6 form-group">
         {{ Form::label('email', 'Email') }}
         {{ Form::text('email', null, ['class' => 'form-control']) }}
     </div>

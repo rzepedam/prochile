@@ -2,10 +2,14 @@
 
 namespace ProChile\Http\Controllers;
 
+use ProChile\City;
 use ProChile\Company;
+use ProChile\Country;
 use ProChile\Industry;
+use ProChile\Position;
 use ProChile\Assistance;
 use Illuminate\Http\Request;
+use ProChile\TypeAssistance;
 use Illuminate\Log\Writer as Log;
 use ProChile\Http\Requests\AssistanceRequest;
 
@@ -17,9 +21,19 @@ class AssistanceController extends Controller
     protected $assistance;
 
     /**
+     * @var City
+     */
+    protected $city;
+
+    /**
      * @var Company
      */
     protected $company;
+
+    /**
+     * @var Country
+     */
+    protected $country;
 
     /**
      * @var Industry
@@ -32,20 +46,40 @@ class AssistanceController extends Controller
     protected $log;
 
     /**
+     * @var Position
+     */
+    protected $position;
+
+    /**
+     * @var TypeAssistance
+     */
+    protected $typeAssistances;
+
+    /**
      * AssistanceController constructor.
      *
      * @param Assistance $assistance
+     * @param City $city
      * @param Company $company
+     * @param Country $country
      * @param Industry $industry
      * @param Log $log
+     * @param Position $position
+     * @param TypeAssistance $typeAssistances
      */
-    public function __construct(Assistance $assistance, Company $company, Industry $industry, Log $log)
+    public function __construct(Assistance $assistance, City $city, Company $company, Country $country,
+        Industry $industry, Log $log, Position $position, TypeAssistance $typeAssistances)
     {
         $this->middleware(['auth'])->only('create', 'store', 'show', 'edit', 'update');
-        $this->assistance = $assistance;
-        $this->company    = $company;
-        $this->industry   = $industry;
-        $this->log        = $log;
+
+        $this->assistance      = $assistance;
+        $this->city            = $city;
+        $this->company         = $company;
+        $this->country         = $country;
+        $this->industry        = $industry;
+        $this->log             = $log;
+        $this->position        = $position;
+        $this->typeAssistances = $typeAssistances;
     }
 
     /**
@@ -65,10 +99,16 @@ class AssistanceController extends Controller
      */
     public function create()
     {
-        $companies  = $this->company->pluck('name', 'id');
-        $industries = $this->industry->pluck('name', 'id');
+        $cities          = $this->city->pluck('name', 'id');
+        $countries       = $this->country->pluck('name', 'id');
+        $companies       = $this->company->pluck('name', 'id');
+        $industries      = $this->industry->pluck('name', 'id');
+        $positions       = $this->position->pluck('name', 'id');
+        $typeAssistances = $this->typeAssistances->pluck('name', 'id');
 
-        return view('assistances.create', compact('companies', 'industries'));
+        return view('assistances.create', compact(
+            'cities', 'companies', 'countries', 'industries', 'positions', 'typeAssistances'
+        ));
     }
 
     /**
@@ -83,7 +123,12 @@ class AssistanceController extends Controller
         $request->request->add(['user_id' => auth()->id()]);
         try
         {
-            $this->assistance->create($request->all());
+            $assistance = $this->assistance->create($request->all());
+            $assistance->user()->create([
+                'name'     => "$assistance->first_name $assistance->male_surname",
+                'email'    => $assistance->email,
+                'password' => bcrypt(str_random(10))
+            ]);
 
             return ['status' => true];
         } catch ( \Exception $e )
@@ -127,11 +172,16 @@ class AssistanceController extends Controller
     {
         try
         {
-            $assistance = $this->assistance->with(['company', 'industry'])->findOrFail($id);
-            $companies  = $this->company->pluck('name', 'id');
-            $industries = $this->industry->pluck('name', 'id');
+            $assistance      = $this->assistance->with(['company', 'industry', 'position'])->findOrFail($id);
+            $cities          = $this->city->pluck('name', 'id');
+            $companies       = $this->company->pluck('name', 'id');
+            $industries      = $this->industry->pluck('name', 'id');
+            $positions       = $this->position->pluck('name', 'id');
+            $typeAssistances = $this->typeAssistances->pluck('name', 'id');
 
-            return view('assistances.edit', compact('assistance', 'companies', 'industries'));
+            return view('assistances.edit', compact(
+                'assistance', 'cities', 'companies', 'industries', 'positions', 'typeAssistances'
+            ));
         } catch ( \Exception $e )
         {
             $this->log->error("Error Edit Assistance: " . $e->getMessage());
@@ -155,6 +205,10 @@ class AssistanceController extends Controller
         {
             $assistance = $this->assistance->findOrFail($id);
             $assistance->update($request->all());
+            $assistance->user()->update([
+                'name'  => "$assistance->first_name $assistance->male_surname",
+                'email' => $assistance->email
+            ]);
 
             return ['status' => true];
         } catch ( \Exception $e )

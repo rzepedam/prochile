@@ -12,18 +12,28 @@
 @section('content')
 
     <div class="section">
-        <article class="message is-primary">
-            <div class="message-header"></div>
-            <div class="message-body">
+        {!! Form::open(['url' => '#']) !!}
 
-                {!! Form::open(['url' => '#']) !!}
-
-                    @include('assistances.sections.fields')
-
-                {{ Form::close() }}
-
+            <article class="message is-primary">
+                <div class="message-header">&nbsp;</div>
+                <div class="message-body">
+                     @include('assistances.sections.fields')
+                </div>
+                <div class="message-footer">&nbsp;</div>
+            </article>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{ route('assistances.index') }}">
+                        <i class="fa fa-mail-reply"></i> Volver
+                    </a>
+                    <a href="javascript:void(0)" class="btn btn-primary pull-right">
+                        <i class="fa fa-save"></i> Guardar
+                    </a>
+                </div>
             </div>
-        </article>
+
+        {{ Form::close() }}
     </div>
 
 @stop

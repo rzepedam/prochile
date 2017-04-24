@@ -14,7 +14,11 @@ class AssistanceEditTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->assistance = factory('ProChile\Assistance')->create();
+        $this->assistance = factory('ProChile\Assistance')->states('comprador')->create([
+            'position_id'        => factory('ProChile\Position')->create(['id' => 1])->id,
+            'type_assistance_id' => factory('ProChile\TypeAssistance')->create(['id' => 2])->id,
+            'city_id'            => factory('ProChile\City')->create()->id
+        ]);
     }
 
     /** @test */
@@ -33,12 +37,15 @@ class AssistanceEditTest extends TestCase
         $this->signIn();
 
         $this->get('/assistances/' . $this->assistance->id . '/edit')
+            ->assertSee($this->assistance->position->name)
+            ->assertSee($this->assistance->typeAssistance->name)
+            ->assertSee($this->assistance->city->name)
+            ->assertSee($this->assistance->company->name)
+            ->assertSee($this->assistance->industry->name)
             ->assertSee($this->assistance->first_name)
             ->assertSee($this->assistance->male_surname)
             ->assertSee($this->assistance->female_surname)
             ->assertSee($this->assistance->rut)
-            ->assertSee($this->assistance->company->name)
-            ->assertSee($this->assistance->industry->name)
             ->assertSee($this->assistance->rut)
             ->assertSee($this->assistance->phone)
             ->assertSee($this->assistance->email);
@@ -59,7 +66,7 @@ class AssistanceEditTest extends TestCase
             'company_id'     => $company->id,
             'industry_id'    => $industry->id,
             'phone'          => '+56930972340',
-            'email'          => 'rauleliasmezamora@gmail.com'
+            'email'          => 'raulmeza@controlqtime.cl'
         ];
 
         $this->put('/assistances/' . $this->assistance->id, $data)
@@ -73,8 +80,11 @@ class AssistanceEditTest extends TestCase
             'company_id'     => $company->id,
             'industry_id'    => $industry->id,
             'phone'          => '+56930972340',
-            'email'          => 'rauleliasmezamora@gmail.com'
-        ]);
+            'email'          => 'raulmeza@controlqtime.cl'])
+            ->assertDatabaseHas('users', [
+                'name'  => 'Raúl Meza',
+                'email' => 'raulmeza@controlqtime.cl'
+            ]);
     }
 
     function updateAssistance($overrides = [])
