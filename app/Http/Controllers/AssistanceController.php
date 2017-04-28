@@ -89,7 +89,11 @@ class AssistanceController extends Controller
      */
     public function index()
     {
-        //
+        $assistances = $this->assistance->with([
+            'city', 'company', 'country', 'industry', 'position'
+        ])->paginate(10);
+
+        return view('assistances.index', compact('assistances'));
     }
 
     /**
@@ -130,7 +134,7 @@ class AssistanceController extends Controller
                 'password' => bcrypt(str_random(10))
             ]);
 
-            return ['status' => true];
+            return ['status' => true, 'url' => '/assistances'];
         } catch ( \Exception $e )
         {
             $this->log->error("Error Store Assistance: " . $e->getMessage());
@@ -228,6 +232,17 @@ class AssistanceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try
+        {
+            $assistance = $this->assistance->findOrFail($id);
+            $assistance->delete();
+
+            return response()->json(['status' => true]);
+        } catch ( \Exception $e )
+        {
+            $this->log->error('Error Delete Assistance: ' . $e->getMessage());
+
+            return response()->json(['status' => false]);
+        }
     }
 }

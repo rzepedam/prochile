@@ -57,12 +57,12 @@ class AssistanceRequest extends FormRequest
                     'email'          => ['required', 'email', 'unique:assistances,email']
                 ];
 
-                if ( \Request::get('position_id') === 1 )
+                if ( \Request::get('position_id') == 1 )
                 {
                     $rules['type_assistance_id'] = ['required', 'in:1,2,3'];
                 } else
                 {
-                    $rules['type_assistance_id'] = ['nullable'];
+                    $rules['type_assistance_id'] = ['nullable', 'in:null'];
                 }
 
                 return $rules;

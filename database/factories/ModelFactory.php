@@ -5,6 +5,14 @@ $factory->define(ProChile\Assistance::class, function (Faker\Generator $faker)
     $firstName   = $faker->firstName;
     $maleSurname = $faker->lastName;
     $email       = $faker->safeEmail;
+    $photos = [
+        'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/12/05/192250513438.jpg',
+        'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/07/18/200031564881.jpg',
+        'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/06/29/163531241838.jpg',
+        'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/12/05/192832116320.jpg',
+        'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/12/05/192515417531.jpg',
+        'https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/12/23/150907095676.jpg'
+    ];
 
     return [
         'user_id'            => factory('ProChile\User')->create(['name' => "$firstName $maleSurname", 'email' => $email])->id,
@@ -19,7 +27,8 @@ $factory->define(ProChile\Assistance::class, function (Faker\Generator $faker)
         'female_surname'     => $faker->lastName,
         'country_id'         => factory('ProChile\Country')->create()->id,
         'phone'              => $faker->e164PhoneNumber,
-        'email'              => $email
+        'email'              => $email,
+        'photo'              => $faker->randomElement($photos)
     ];
 });
 

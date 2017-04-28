@@ -14,11 +14,8 @@ class AssistanceEditTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->assistance = factory('ProChile\Assistance')->states('comprador')->create([
-            'position_id'        => factory('ProChile\Position')->create(['id' => 1])->id,
-            'type_assistance_id' => factory('ProChile\TypeAssistance')->create(['id' => 2])->id,
-            'city_id'            => factory('ProChile\City')->create()->id
-        ]);
+        $this->assistance = factory('ProChile\Assistance')->create();
+        dd($this->assistance);
     }
 
     /** @test */

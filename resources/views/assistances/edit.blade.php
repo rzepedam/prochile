@@ -16,7 +16,7 @@
         <div class="ibox float-e-margins animated fadeInRight">
             <div class="ibox-content">
 
-                @include('assistances.sections.fields')
+                @include('assistances.partials.fields')
 
             </div>
         </div>

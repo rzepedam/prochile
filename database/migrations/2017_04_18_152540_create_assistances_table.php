@@ -28,6 +28,7 @@ class CreateAssistancesTable extends Migration
             $table->unsignedInteger('industry_id');
             $table->string('phone');
             $table->string('email');
+            $table->string('photo');
         });
     }
 

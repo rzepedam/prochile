@@ -13,7 +13,7 @@ class CountryTableSeeder extends Seeder
     {
         DB::table('countries')->truncate();
 
-        /*ProChile\Country::create([
+        ProChile\Country::create([
             'name' => 'Argentina'
         ]);
 
@@ -47,6 +47,6 @@ class CountryTableSeeder extends Seeder
 
         ProChile\Country::create([
             'name' => 'Venezuela'
-        ]);*/
+        ]);
     }
 }

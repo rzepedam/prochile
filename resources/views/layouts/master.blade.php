@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="/img/prochile.png">
         <title>ProChile | @yield('title') </title>
         <link rel="stylesheet" href="{!! asset('css/inspinia.css') !!}" />
         <link rel="stylesheet" href="{!! asset('css/app.css') !!}" />
@@ -25,7 +26,7 @@
 
                 </div>
 
-                @include('layouts.sections.footer')
+                {{--@include('layouts.partials.footer')--}}
 
             </div>
 

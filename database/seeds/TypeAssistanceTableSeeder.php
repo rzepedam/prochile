@@ -13,7 +13,7 @@ class TypeAssistanceTableSeeder extends Seeder
     {
         DB::table('type_assistances')->truncate();
 
-        /*ProChile\TypeAssistance::create([
+        ProChile\TypeAssistance::create([
             'name' => 'Comprador',
         ]);
 
@@ -23,6 +23,6 @@ class TypeAssistanceTableSeeder extends Seeder
 
         ProChile\TypeAssistance::create([
             'name' => 'Exportador',
-        ]);*/
+        ]);
     }
 }

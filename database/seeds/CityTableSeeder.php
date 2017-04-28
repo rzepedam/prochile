@@ -13,20 +13,12 @@ class CityTableSeeder extends Seeder
     {
         DB::table('cities')->truncate();
 
-        /*ProChile\City::create([
+        ProChile\City::create([
             'name' => 'Antofagasta'
         ]);
 
         ProChile\City::create([
-            'name' => 'Viña del Mar'
-        ]);
-
-        ProChile\City::create([
-            'name' => 'Valparaíso'
-        ]);
-
-        ProChile\City::create([
             'name' => 'Puerto Varas'
-        ]);*/
+        ]);
     }
 }

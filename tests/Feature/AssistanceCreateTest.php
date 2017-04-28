@@ -182,12 +182,21 @@ class AssistanceCreateTest extends TestCase
     }
 
     /** @test */
-    function a_assistance_require_a_type_assistance_nullable()
+    function a_assistance_require_a_type_assistance_nullable_when_position_is_distinct_to_1()
     {
         $this->createAssistance([
             'position_id'        => factory('ProChile\Position')->create()->id,
             'type_assistance_id' => null
         ])->assertSessionMissing('type_assistance_id');
+    }
+
+    /** @test */
+    function a_assistance_does_not_allowed_type_assistances_distinct_to_null_when_position_is_distinct_to_1()
+    {
+        $this->createAssistance([
+            'position_id'        => factory('ProChile\Position')->create()->id,
+            'type_assistance_id' => factory('ProChile\TypeAssistance')->create(['id' => 999])->id
+        ])->assertSessionHasErrors('type_assistance_id');
     }
 
     /** @test */

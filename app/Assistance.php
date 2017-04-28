@@ -11,7 +11,8 @@ class Assistance extends Model
      */
     protected $fillable   = [
         'user_id', 'position_id', 'type_assistance_id', 'city_id', 'country_id', 'first_name',
-        'male_surname', 'female_surname', 'rut', 'company_id', 'industry_id', 'phone', 'email'
+        'male_surname', 'female_surname', 'rut', 'company_id', 'industry_id', 'phone', 'email',
+        'photo'
     ];
 
     /**
@@ -48,6 +49,11 @@ class Assistance extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
     }
 
     /**

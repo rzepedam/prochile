@@ -13,7 +13,7 @@ class PositionTableSeeder extends Seeder
     {
         DB::table('positions')->truncate();
 
-        /*ProChile\Position::create([
+        ProChile\Position::create([
             'name' => 'Asistente'
         ]);
 
@@ -27,6 +27,6 @@ class PositionTableSeeder extends Seeder
 
         ProChile\Position::create([
             'name' => 'Stand'
-        ]);*/
+        ]);
     }
 }
