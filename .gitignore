@@ -1,10 +1,8 @@
 /node_modules
-/public/hot
-/public/storage
-/storage/*.key
+/public/css
+/public/js
+/public/img
+/public/fonts
 /vendor
 /.idea
-/.vagrant
-Homestead.json
-Homestead.yaml
 .env
