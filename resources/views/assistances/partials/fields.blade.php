@@ -5,7 +5,7 @@
     	{{ Form::select('position_id', $positions, null, ['class' => 'form-control']) }}
     </div>
     {{-- Tipo Asistente select field --}}
-    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
+    <div id="typeAssistance" class="col-xs-12 col-sm-4 col-md-4 form-group">
     	{{ Form::label('type_assistance_id', 'Tipo Asistente') }}
     	{{ Form::select('type_assistance_id', $typeAssistances, null, ['class' => 'form-control']) }}
     </div>
@@ -27,7 +27,7 @@
     {{-- Rut text field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
         {{ Form::label('rut', 'Rut') }}
-        {{ Form::text('rut', null, ['class' => 'form-control']) }}
+        {{ Form::text('rut', null, ['class' => 'form-control', 'id' => 'rut']) }}
     </div>
     {{-- Primer Nombre text field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
@@ -57,6 +57,6 @@
     {{-- Email text field --}}
     <div class="col-xs-12 col-sm-6 col-md-6 form-group">
         {{ Form::label('email', 'Email') }}
-        {{ Form::text('email', null, ['class' => 'form-control']) }}
+        {{ Form::text('email', null, ['class' => 'form-control', 'id' => 'email']) }}
     </div>
 </div>

@@ -9231,10 +9231,9 @@ body.skin-3 {
   text-align: center;
 }
 
-.skin-3 .img-circle {
+/*.skin-3 .img-circle {
   border-radius: 5px;
-}
-
+}*/
 .skin-3 .navbar-default .nav > li > a:hover, .skin-3 .navbar-default .nav > li > a:focus {
   background: #38283c;
   color: #fff;

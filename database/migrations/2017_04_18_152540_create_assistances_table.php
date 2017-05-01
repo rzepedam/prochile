@@ -23,12 +23,13 @@ class CreateAssistancesTable extends Migration
             $table->string('first_name');
             $table->string('male_surname');
             $table->string('female_surname');
-            $table->string('rut');
+            $table->string('rut')->unique();
             $table->unsignedInteger('company_id');
             $table->unsignedInteger('industry_id');
             $table->string('phone');
-            $table->string('email');
-            $table->string('photo');
+            $table->string('email')->unique();
+            $table->string('photo')->default('/img/prochile.png');
+            $table->timestamps();
         });
     }
 

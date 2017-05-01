@@ -2,12 +2,20 @@
     <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
-                <div class="dropdown profile-element"> <span>
-                    <img alt="image" class="img-circle"  style="width: 48px; height: 48px;" src="https://s3-sa-east-1.amazonaws.com/biometry/faces/2016/07/18/200031564881.jpg">
-                     </span>
+                <div class="dropdown profile-element">
+                    <span>
+                        <img src="{{ auth()->user()->assistance->photo }}" class="img-circle img-md">
+                    </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
-                     </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">{{ auth()->user()->name }}</strong>
+                            </span>
+                            <span class="text-muted text-xs block">
+                                {{ auth()->user()->assistance->position->name }} <b class="caret"></b>
+                            </span>
+                        </span>
+                    </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a href="javascript:void(0)">Editar Perfil</a></li>
                     </ul>
@@ -27,7 +35,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="{{ url('#') }}">
+                <a href="javascript:void(0)">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="nav-label">Registro de Asistencia</span>
                 </a>
             </li>

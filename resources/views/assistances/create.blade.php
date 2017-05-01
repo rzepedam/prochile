@@ -51,5 +51,23 @@
 @section('scripts')
 
     <script type="text/javascript" src="{{ elixir('js/create-edit.js') }}"></script>
+    <script type="text/javascript" src="{{ elixir('js/assistances/create-edit.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#position_id').on('change', function() {
+
+                var option = $(this).find('option:selected').val();
+
+                if (option == 1)
+                {
+                    $('#typeAssistance').removeClass('hide');
+                    $('#type_assistance_id').val(1);
+                }else {
+                    $('#typeAssistance').addClass('hide');
+                    $('#type_assistance_id').val(null);
+                }
+            });
+        });
+    </script>
 
 @stop

@@ -49,8 +49,6 @@
                 $('#modalRut').text(object['rut']);
                 $('#modalCountry').text(object['country']['name']);
                 $('#modalPhone').text(object['phone']);
-
-                $('.skin-3 .img-circle').css('border-radius', '99px');
             });
         });
     </script>

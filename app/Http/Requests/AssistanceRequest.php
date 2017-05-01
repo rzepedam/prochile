@@ -32,6 +32,14 @@ class AssistanceRequest extends FormRequest
         return true;
     }
 
+    public function all()
+    {
+        $attributes        = parent::all();
+        $attributes['rut'] = str_replace('.', '', $attributes['rut']);
+
+        return $attributes;
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -49,9 +57,9 @@ class AssistanceRequest extends FormRequest
                     'company_id'     => ['required', 'exists:companies,id'],
                     'industry_id'    => ['required', 'exists:industries,id'],
                     'rut'            => ['required', 'unique:assistances,rut'],
+                    'first_name'     => ['required'],
                     'male_surname'   => ['required'],
                     'female_surname' => ['required'],
-                    'first_name'     => ['required'],
                     'country_id'     => ['required', 'exists:countries,id'],
                     'phone'          => ['required'],
                     'email'          => ['required', 'email', 'unique:assistances,email']
@@ -60,9 +68,6 @@ class AssistanceRequest extends FormRequest
                 if ( \Request::get('position_id') == 1 )
                 {
                     $rules['type_assistance_id'] = ['required', 'in:1,2,3'];
-                } else
-                {
-                    $rules['type_assistance_id'] = ['nullable', 'in:null'];
                 }
 
                 return $rules;

@@ -8,9 +8,11 @@ use ProChile\Country;
 use ProChile\Industry;
 use ProChile\Position;
 use ProChile\Assistance;
-use Illuminate\Http\Request;
+use ProChile\Mail\SignUp;
 use ProChile\TypeAssistance;
 use Illuminate\Log\Writer as Log;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use ProChile\Http\Requests\AssistanceRequest;
 
 class AssistanceController extends Controller
@@ -89,9 +91,9 @@ class AssistanceController extends Controller
      */
     public function index()
     {
-        $assistances = $this->assistance->with([
-            'city', 'company', 'country', 'industry', 'position'
-        ])->paginate(10);
+        $assistances = $this->assistance->with(['city', 'company', 'country', 'industry', 'position'])
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
 
         return view('assistances.index', compact('assistances'));
     }
@@ -125,19 +127,26 @@ class AssistanceController extends Controller
     public function store(AssistanceRequest $request)
     {
         $request->request->add(['user_id' => auth()->id()]);
+        DB::beginTransaction();
+
         try
         {
             $assistance = $this->assistance->create($request->all());
-            $assistance->user()->create([
+            $user       = $assistance->user()->create([
                 'name'     => "$assistance->first_name $assistance->male_surname",
                 'email'    => $assistance->email,
                 'password' => bcrypt(str_random(10))
             ]);
 
+            // Sending email...
+            Mail::to($user)->send(new SignUp($user));
+            DB::commit();
+
             return ['status' => true, 'url' => '/assistances'];
         } catch ( \Exception $e )
         {
             $this->log->error("Error Store Assistance: " . $e->getMessage());
+            DB::rollBack();
 
             return ['status' => false];
         }
@@ -235,6 +244,7 @@ class AssistanceController extends Controller
         try
         {
             $assistance = $this->assistance->findOrFail($id);
+            $assistance->user()->delete();
             $assistance->delete();
 
             return response()->json(['status' => true]);

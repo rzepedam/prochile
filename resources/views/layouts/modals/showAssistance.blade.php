@@ -3,7 +3,7 @@
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <img id="modalImage" src="javascript:void(0)" class="img-circle img-lg">
+                <img id="modalImage" src="#" class="img-circle img-lg">
                 <h4 id="modalName" class="modal-title"></h4>
                 <small id="modalEmail"></small>
             </div>

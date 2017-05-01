@@ -3,6 +3,7 @@
 namespace ProChile;
 
 use Illuminate\Database\Eloquent\Model;
+use ProChile\Http\Helpers\Helper;
 
 class Assistance extends Model
 {
@@ -14,12 +15,6 @@ class Assistance extends Model
         'male_surname', 'female_surname', 'rut', 'company_id', 'industry_id', 'phone', 'email',
         'photo'
     ];
-
-    /**
-     * @var bool
-     */
-    public $timestamps = false;
-
 
     public function position()
     {
@@ -57,10 +52,44 @@ class Assistance extends Model
     }
 
     /**
+     * @param string $value
+     */
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['first_name'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setMaleSurnameAttribute($value)
+    {
+        $this->attributes['male_surname'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setFemaleSurnameAttribute($value)
+    {
+        $this->attributes['female_surname'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
+
+    /**
      * @param $value
      */
     public function setRutAttribute($value)
     {
         $this->attributes['rut'] = str_replace('.', '', $value);
+    }
+
+    /**
+     * @param $value '16356109-3'
+     *
+     * @return string '16.356.109-3'
+     */
+    public function getRutAttribute($value)
+    {
+        return Helper::rut($value);
     }
 }

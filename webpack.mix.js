@@ -9,7 +9,8 @@ mix.options({ processCssUrls: false });
             'node_modules/animate.css/animate.min.css',
             'node_modules/font-awesome/css/font-awesome.min.css',
             'node_modules/sweetalert/dist/sweetalert.css',
-            'node_modules/node-waves/dist/waves.min.css'
+            'node_modules/node-waves/dist/waves.min.css',
+            'node_modules/toastr/build/toastr.min.css'
         ], 'public/css/inspinia.css')
         .scripts([
             'node_modules/jquery/dist/jquery.min.js',
@@ -20,6 +21,7 @@ mix.options({ processCssUrls: false });
             'resources/assets/vendor/inspinia.js',
             'node_modules/sweetalert/dist/sweetalert.min.js',
             'node_modules/node-waves/dist/waves.min.js',
+            'node_modules/toastr/build/toastr.min.js',
             'resources/assets/utilities/init.js'
         ], 'public/js/inspinia.js');
 
@@ -39,3 +41,11 @@ mix.options({ processCssUrls: false });
     mix.scripts([
         'resources/assets/utilities/delete.js',
     ], 'public/js/index.js');
+
+// Assistances
+    // Create-Edit
+        mix.scripts([
+            'node_modules/jquery.rut/jquery.rut.min.js',
+            'resources/assets/utilities/valida_rut.js',
+            'resources/assets/utilities/valida_email.js'
+        ], 'public/js/assistances/create-edit.js')
