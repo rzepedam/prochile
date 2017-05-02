@@ -43,7 +43,8 @@ $factory->define(ProChile\City::class, function (Faker\Generator $faker)
 $factory->define(ProChile\Company::class, function (Faker\Generator $faker)
 {
     return [
-        'name' => $faker->company
+        'user_id' => 1,
+        'name'    => $faker->company
     ];
 });
 
@@ -77,7 +78,7 @@ $factory->define(ProChile\User::class, function (Faker\Generator $faker)
         'first_name'     => $faker->name,
         'male_surname'   => $faker->lastName,
         'email'          => $faker->unique()->safeEmail,
-        'password'       => $password ?: $password = bcrypt('secret'),
+        'password'       => $password ?: $password = 'secret',
         'remember_token' => str_random(10),
     ];
 });

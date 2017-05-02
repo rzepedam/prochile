@@ -86,7 +86,7 @@ class UserController extends Controller
         try
         {
             $user = $this->user->create($request->all());
-            Mail::to($user)->send(new SignUp($password, $user));   // Sending email with credentials...
+            Mail::to($user)->queue(new SignUp($password, $user));   // Sending email with credentials...
             DB::commit();
 
             return ['status' => true, 'url' => '/users'];

@@ -20,7 +20,7 @@ class UserTableSeeder extends Seeder
             'first_name'   => 'Raúl',
             'male_surname' => 'Meza',
             'email'        => 'raulmeza@controlqtime.cl',
-            'password'     => bcrypt('grupo@lfr@12'),
+            'password'     => 'grupo@lfr@12'
         ]);
     }
 }
