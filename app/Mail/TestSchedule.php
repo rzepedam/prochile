@@ -19,9 +19,9 @@ class TestSchedule extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param User $users
+     * @param $users
      */
-    public function __construct(User $users)
+    public function __construct($users)
     {
         $this->users = $users;
     }

@@ -4,7 +4,6 @@ namespace ProChile\Console\Commands;
 
 use ProChile\User;
 use Illuminate\Console\Command;
-use ProChile\Mail\TestSchedule;
 
 class GraphicsEvery15Minutes extends Command
 {
@@ -29,8 +28,8 @@ class GraphicsEvery15Minutes extends Command
      */
     public function handle()
     {
-        $users = User::whereIn('role_id', [2, 3]);
+        $users = User::whereIn('role_id', [2, 3])->get(['email']);
 
-        Mail::to($users)->send(new TestSchedule($users));
+        Mail::to($users)->send(new ProChile\Mail\TestSchedule($users));
     }
 }
