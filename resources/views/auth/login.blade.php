@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProChile | Login </title>
-    <link rel="stylesheet" href="{!! asset('css/inspinia.css') !!}" />
-    <link rel="stylesheet" href="{!! asset('css/app.css') !!}" />
+    <link rel="stylesheet" href="{{ mix('css/inspinia.css') }}" />
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
     <style>
         body {
             margin-top: 100px;
@@ -14,7 +14,6 @@
 </head>
 <body>
     <div class="container">
-        {{ dd(getenv('APP_ENV')) }}
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
                 <div class="panel panel-default">
@@ -71,6 +70,6 @@
         </div>
     </div>
 
-    <script src="{!! asset('js/inspinia.js') !!}" type="text/javascript"></script>
+    <script src="{{ mix('js/inspinia.js') }}" type="text/javascript"></script>
 </body>
 </html>

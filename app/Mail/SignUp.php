@@ -13,6 +13,11 @@ class SignUp extends Mailable
     use Queueable, SerializesModels;
 
     /**
+     * @var
+     */
+    public $password;
+
+    /**
      * @var User
      */
     public $user;
@@ -20,11 +25,13 @@ class SignUp extends Mailable
     /**
      * Create a new message instance.
      *
+     * @param $password
      * @param User $user
      */
-    public function __construct(User $user)
+    public function __construct($password, User $user)
     {
-        $this->user = $user;
+        $this->password = $password;
+        $this->user     = $user;
     }
 
     /**

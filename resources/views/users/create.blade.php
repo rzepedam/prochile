@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
-@section('title') Crear Asistente @stop
+@section('title') Crear Usuario @stop
 
-@section('title-header') Crear Asistente @stop
+@section('title-header') Crear Usuario @stop
 
 @section('breadcrumb')
-    <li><a href="{{ route('assistances.index') }}">Asistentes</a></li>
+    <li><a href="{{ route('users.index') }}">Usuarios</a></li>
     <li class="active"><strong>Nuevo</strong></li>
 @stop
 
@@ -14,13 +14,13 @@
     @include('layouts.messages.error')
 
     <div class="section animated fadeInRight">
-        {{ Form::open(['route' => 'assistances.store', 'method' => 'POST', 'id' => 'form-submit']) }}
+        {{ Form::open(['route' => 'users.store', 'method' => 'POST', 'id' => 'form-submit']) }}
 
             <article class="message is-primary">
                 <div class="message-header">&nbsp;</div>
                 <div class="message-body">
 
-                     @include('assistances.partials.fields')
+                     @include('users.partials.fields')
 
                 </div>
                 <div class="message-footer">&nbsp;</div>
@@ -28,7 +28,7 @@
             <br />
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{ route('assistances.index') }}">
+                    <a href="{{ route('users.index') }}">
                         <i class="fa fa-mail-reply"></i> Volver
                     </a>
                     <div id="spinner" class="sk-spinner sk-spinner-wave pull-right hide">
@@ -51,5 +51,5 @@
 
 @section('scripts')
     <script type="text/javascript" src="{{ mix('js/create-edit.js') }}"></script>
-    <script type="text/javascript" src="{{ mix('js/assistances/create-edit.js') }}"></script>
+    <script type="text/javascript" src="{{ mix('js/users/create-edit.js') }}"></script>
 @stop

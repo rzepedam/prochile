@@ -32,17 +32,17 @@
 @stop
 
 @section('scripts')
-    <script src="{{ elixir('/js/index.js') }}"></script>
+    <script src="{{ mix('/js/index.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
 
             $('.showModal').on('click', function() {
                 var object = JSON.parse($(this).attr('data-object'));
-
+                
                 $('#modalImage').attr('src', object['photo']);
                 $('#modalName').text(object['first_name'] + ' ' + object['male_surname'] + ' ' + object['female_surname']);
                 $('#modalEmail').text(object['email']);
-                $('#modalPosition').text(object['position']['name']);
+                $('#modalTypeAssistance').text(object['type_assistance']['name']);
                 $('#modalCity').text(object['city']['name']);
                 $('#modalCompany').text(object['company']['name']);
                 $('#modalIndustry').text(object['industry']['name']);

@@ -11,8 +11,8 @@
                 <div class="row">
                     <div class="col-md-offset-2 col-md-8">
                         <div class="row">
-                            <span class="col-xs-12 col-sm-5 col-md-5"><strong>Cargo: </strong></span>
-                            <span id="modalPosition" class="col-xs-12 col-sm-7 col-md-7"></span>
+                            <span class="col-xs-12 col-sm-5 col-md-5"><strong>Tipo Asistente: </strong></span>
+                            <span id="modalTypeAssistance" class="col-xs-12 col-sm-7 col-md-7"></span>
                         </div>
                         <p></p>
                         <div class="row">

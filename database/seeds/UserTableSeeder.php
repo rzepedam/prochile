@@ -13,5 +13,13 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->truncate();
+
+        \ProChile\User::create([
+            'role_id'      => 1,
+            'first_name'   => 'Raúl',
+            'male_surname' => 'Meza',
+            'email'        => 'raulmeza@controlqtime.cl',
+            'password'     => bcrypt('grupo@lfr@12'),
+        ]);
     }
 }

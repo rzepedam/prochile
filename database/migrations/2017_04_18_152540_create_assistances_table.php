@@ -16,16 +16,15 @@ class CreateAssistancesTable extends Migration
         Schema::create('assistances', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('position_id');
             $table->unsignedInteger('type_assistance_id')->nullable();
-            $table->unsignedInteger('city_id');
+            $table->unsignedInteger('city_id')->nullable();
+            $table->unsignedInteger('company_id')->nullable();
+            $table->unsignedInteger('industry_id')->nullable();
             $table->unsignedInteger('country_id');
             $table->string('first_name');
             $table->string('male_surname');
             $table->string('female_surname');
             $table->string('rut')->unique();
-            $table->unsignedInteger('company_id');
-            $table->unsignedInteger('industry_id');
             $table->string('phone');
             $table->string('email')->unique();
             $table->string('photo')->default('/img/prochile.png');

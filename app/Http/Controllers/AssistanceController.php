@@ -6,13 +6,9 @@ use ProChile\City;
 use ProChile\Company;
 use ProChile\Country;
 use ProChile\Industry;
-use ProChile\Position;
 use ProChile\Assistance;
-use ProChile\Mail\SignUp;
 use ProChile\TypeAssistance;
 use Illuminate\Log\Writer as Log;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use ProChile\Http\Requests\AssistanceRequest;
 
 class AssistanceController extends Controller
@@ -48,11 +44,6 @@ class AssistanceController extends Controller
     protected $log;
 
     /**
-     * @var Position
-     */
-    protected $position;
-
-    /**
      * @var TypeAssistance
      */
     protected $typeAssistances;
@@ -66,13 +57,12 @@ class AssistanceController extends Controller
      * @param Country $country
      * @param Industry $industry
      * @param Log $log
-     * @param Position $position
      * @param TypeAssistance $typeAssistances
      */
     public function __construct(Assistance $assistance, City $city, Company $company, Country $country,
-        Industry $industry, Log $log, Position $position, TypeAssistance $typeAssistances)
+        Industry $industry, Log $log, TypeAssistance $typeAssistances)
     {
-        $this->middleware(['auth'])->only('create', 'store', 'show', 'edit', 'update');
+        $this->middleware(['auth']);
 
         $this->assistance      = $assistance;
         $this->city            = $city;
@@ -80,7 +70,6 @@ class AssistanceController extends Controller
         $this->country         = $country;
         $this->industry        = $industry;
         $this->log             = $log;
-        $this->position        = $position;
         $this->typeAssistances = $typeAssistances;
     }
 
@@ -91,7 +80,7 @@ class AssistanceController extends Controller
      */
     public function index()
     {
-        $assistances = $this->assistance->with(['city', 'company', 'country', 'industry', 'position'])
+        $assistances = $this->assistance->with(['city', 'company', 'country', 'industry', 'typeAssistance'])
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
 
@@ -105,15 +94,15 @@ class AssistanceController extends Controller
      */
     public function create()
     {
-        $cities          = $this->city->pluck('name', 'id');
+        $citiesAux       = $this->city->get();
+        $cities          = $citiesAux->pluck('name', 'id');
         $countries       = $this->country->pluck('name', 'id');
         $companies       = $this->company->pluck('name', 'id');
-        $industries      = $this->industry->pluck('name', 'id');
-        $positions       = $this->position->pluck('name', 'id');
+        $industries      = $this->industry->where('city_id', $citiesAux->first()->id)->pluck('name', 'id');
         $typeAssistances = $this->typeAssistances->pluck('name', 'id');
 
         return view('assistances.create', compact(
-            'cities', 'companies', 'countries', 'industries', 'positions', 'typeAssistances'
+            'cities', 'companies', 'countries', 'industries', 'typeAssistances'
         ));
     }
 
@@ -127,26 +116,14 @@ class AssistanceController extends Controller
     public function store(AssistanceRequest $request)
     {
         $request->request->add(['user_id' => auth()->id()]);
-        DB::beginTransaction();
-
         try
         {
-            $assistance = $this->assistance->create($request->all());
-            $user       = $assistance->user()->create([
-                'name'     => "$assistance->first_name $assistance->male_surname",
-                'email'    => $assistance->email,
-                'password' => bcrypt(str_random(10))
-            ]);
-
-            // Sending email...
-            Mail::to($user)->send(new SignUp($user));
-            DB::commit();
+            $this->assistance->create($request->all());
 
             return ['status' => true, 'url' => '/assistances'];
         } catch ( \Exception $e )
         {
             $this->log->error("Error Store Assistance: " . $e->getMessage());
-            DB::rollBack();
 
             return ['status' => false];
         }
@@ -163,7 +140,9 @@ class AssistanceController extends Controller
     {
         try
         {
-            $assistance = $this->assistance->with(['company'])->findOrFail($id);
+            $assistance = $this->assistance
+                ->with(['city', 'company', 'country', 'industry', 'typeAssistance'])
+                ->findOrFail($id);
 
             return view('assistances.show', compact('assistance'));
         } catch ( \Exception $e )
@@ -185,15 +164,17 @@ class AssistanceController extends Controller
     {
         try
         {
-            $assistance      = $this->assistance->with(['company', 'industry', 'position'])->findOrFail($id);
+            $assistance = $this->assistance
+                ->with(['city', 'company', 'country', 'industry', 'typeAssistance'])
+                ->findOrFail($id);
+
             $cities          = $this->city->pluck('name', 'id');
             $companies       = $this->company->pluck('name', 'id');
             $industries      = $this->industry->pluck('name', 'id');
-            $positions       = $this->position->pluck('name', 'id');
             $typeAssistances = $this->typeAssistances->pluck('name', 'id');
 
             return view('assistances.edit', compact(
-                'assistance', 'cities', 'companies', 'industries', 'positions', 'typeAssistances'
+                'assistance', 'cities', 'companies', 'industries', 'typeAssistances'
             ));
         } catch ( \Exception $e )
         {
@@ -218,10 +199,6 @@ class AssistanceController extends Controller
         {
             $assistance = $this->assistance->findOrFail($id);
             $assistance->update($request->all());
-            $assistance->user()->update([
-                'name'  => "$assistance->first_name $assistance->male_surname",
-                'email' => $assistance->email
-            ]);
 
             return ['status' => true];
         } catch ( \Exception $e )
@@ -244,7 +221,6 @@ class AssistanceController extends Controller
         try
         {
             $assistance = $this->assistance->findOrFail($id);
-            $assistance->user()->delete();
             $assistance->delete();
 
             return response()->json(['status' => true]);

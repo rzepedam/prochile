@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="/img/prochile.png">
         <title>ProChile | @yield('title') </title>
-        <link rel="stylesheet" href="{!! asset('css/inspinia.css') !!}" />
-        <link rel="stylesheet" href="{!! asset('css/app.css') !!}" />
+        <link rel="stylesheet" href="{{ mix('css/inspinia.css') }}" />
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
         @yield('css')
     </head>
     <body class="pace-done skin-3">
@@ -32,7 +32,7 @@
 
         </div>
 
-        <script src="{!! asset('js/inspinia.js') !!}" type="text/javascript"></script>
+        <script src="{{ mix('js/inspinia.js') }}" type="text/javascript"></script>
         @yield('scripts')
 
     </body>

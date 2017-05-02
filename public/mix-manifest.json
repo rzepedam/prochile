@@ -1,9 +1,10 @@
 {
-  "/mix.js": "/mix.js",
-  "/css/app.css": "/css/app.css",
-  "/css/inspinia.css": "/css/inspinia.css",
-  "/js/inspinia.js": "/js/inspinia.js",
-  "/js/create-edit.js": "/js/create-edit.js",
-  "/js/index.js": "/js/index.js",
-  "/js/assistances/create-edit.js": "/js/assistances/create-edit.js"
+  "/mix.js": "/mix.f6ea224f380a64e12309.js",
+  "/css/app.css": "/css/app.566407c002f149fa2f5f.css",
+  "/css/inspinia.css": "/css/inspinia.568e700d7608df205d4265882babbcbe.css",
+  "/js/inspinia.js": "/js/inspinia.f0da975e9ac75c3c356c08695fe89af8.js",
+  "/js/create-edit.js": "/js/create-edit.47e4bf12827e71267950fe737977d949.js",
+  "/js/index.js": "/js/index.9a8ce822769d8fe8ebbe53b55236f0b9.js",
+  "/js/assistances/create-edit.js": "/js/assistances/create-edit.eb2e0150ce5e602ab8d373610840b3ec.js",
+  "/js/users/create-edit.js": "/js/users/create-edit.a1d640b6df981797cdbb8998cdbfd0b1.js"
 }

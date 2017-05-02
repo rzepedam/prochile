@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'role_id', 'first_name', 'male_surname', 'email', 'photo', 'password'
     ];
 
     /**
@@ -27,8 +27,53 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function assistance()
     {
     	return $this->hasOne(Assistance::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+
+    /**
+     * @param string $value
+     */
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['first_name'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setMaleSurnameAttribute($value)
+    {
+        $this->attributes['male_surname'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->male_surname;
     }
 }

@@ -4,7 +4,7 @@
             <li class="nav-header">
                 <div class="dropdown profile-element">
                     <span>
-                        <img src="{{ auth()->user()->assistance->photo }}" class="img-circle img-md">
+                        <img src="{{ auth()->user()->photo }}" class="img-circle img-md">
                     </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
@@ -12,7 +12,7 @@
                                 <strong class="font-bold">{{ auth()->user()->name }}</strong>
                             </span>
                             <span class="text-muted text-xs block">
-                                {{ auth()->user()->assistance->position->name }} <b class="caret"></b>
+                                {{ auth()->user()->role->name }} <b class="caret"></b>
                             </span>
                         </span>
                     </a>
@@ -26,17 +26,22 @@
             </li>
             <li class="{{ (Request::is('/') ? 'active' : '') }}">
                 <a href="{{ url('/') }}">
-                    <i class="fa fa-home"></i> <span class="nav-label">Inicio</span>
+                    <i class="fa fa-line-chart" aria-hidden="true"></i> <span class="nav-label">Gráficas</span>
                 </a>
             </li>
             <li class="{{ (Request::is('assistances') ? 'active' : '') }}">
                 <a href="{{ url('/assistances') }}">
-                    <i class="fa fa-users"></i> <span class="nav-label">Asistentes</span>
+                    <i class="fa fa-street-view" aria-hidden="true"></i> <span class="nav-label">Asistentes</span>
                 </a>
             </li>
             <li class="">
                 <a href="javascript:void(0)">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="nav-label">Registro de Asistencia</span>
+                </a>
+            </li>
+            <li class="{{ (Request::is('users') ? 'active' : '') }}">
+                <a href="{{ url('/users') }}">
+                    <i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span>
                 </a>
             </li>
         </ul>

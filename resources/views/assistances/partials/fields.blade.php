@@ -1,9 +1,4 @@
 <div class="row">
-    {{-- Cargo select field --}}
-    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
-    	{{ Form::label('position_id', 'Cargo') }}
-    	{{ Form::select('position_id', $positions, null, ['class' => 'form-control']) }}
-    </div>
     {{-- Tipo Asistente select field --}}
     <div id="typeAssistance" class="col-xs-12 col-sm-4 col-md-4 form-group">
     	{{ Form::label('type_assistance_id', 'Tipo Asistente') }}
