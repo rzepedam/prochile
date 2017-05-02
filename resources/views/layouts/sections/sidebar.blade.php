@@ -17,7 +17,7 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="javascript:void(0)">Editar Perfil</a></li>
+                        <li><a href="{{ route('users.edit', auth()->user()->id) }}">Editar Perfil</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">

@@ -6,6 +6,7 @@ use ProChile\Role;
 use ProChile\User;
 use ProChile\Mail\SignUp;
 use Illuminate\Http\Request;
+use ProChile\Mail\UpdateProfile;
 use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -99,18 +100,6 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int $id
@@ -119,20 +108,47 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        try
+        {
+            $user  = $this->user->with(['role'])->findOrFail($id);
+            $roles = $this->role->pluck('name', 'id');
+
+            return view('users.edit', compact('user', 'roles'));
+        } catch ( \Exception $e )
+        {
+            $this->log->error("Error Update User: " . $e->getMessage());
+            DB::rollback();
+
+            return ['status' => false];
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param UserRequest $request
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try
+        {
+            $user  = $this->user->with(['role'])->findOrFail($id);
+            $user->update($request->all());
+            Mail::to($user)->send(new UpdateProfile($user));   // Sending email update profile...
+            DB::commit();
+
+            return ['status' => true, 'url' => '/users'];
+        } catch ( \Exception $e )
+        {
+            $this->log->error("Error Update User: " . $e->getMessage());
+            DB::rollback();
+
+            return ['status' => false];
+        }
     }
 
     /**
