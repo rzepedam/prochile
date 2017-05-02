@@ -17,6 +17,6 @@
     {{-- Email text field --}}
     <div class="col-xs-12 col-sm-6 col-md-6 form-group">
     	{{ Form::label('email', 'Email') }}
-    	{{ Form::text('email', null, ['class' => 'form-control']) }}
+    	{{ Form::text('email', null, ['class' => 'form-control', 'id' => 'email']) }}
     </div>
 </div>

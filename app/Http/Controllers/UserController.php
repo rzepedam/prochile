@@ -3,6 +3,7 @@
 namespace ProChile\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use ProChile\Http\Requests\UserRequest;
 use ProChile\Role;
 use ProChile\User;
 use ProChile\Mail\SignUp;
@@ -70,11 +71,11 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param UserRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $password = str_random(15);
         $request->request->add(['password' => bcrypt($password)]);

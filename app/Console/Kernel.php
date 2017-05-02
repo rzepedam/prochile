@@ -4,6 +4,7 @@ namespace ProChile\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use ProChile\Console\Commands\AddCityCommand;
+use ProChile\Console\Commands\GraphicsEvery15Minutes;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -14,7 +15,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        AddCityCommand::class
+        AddCityCommand::class, GraphicsEvery15Minutes::class
     ];
 
     /**
