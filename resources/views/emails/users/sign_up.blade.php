@@ -11,7 +11,7 @@ Contraseña: {{ $password }}
 <br />
 <br />
 Te sugerimos que cambies la contraseña y tu imagen de perfil inmediatamente desde aquí
-@component('mail::button', ['url' =>  getenv('APP_URL') . '/login'])
+@component('mail::button', ['url' =>  getenv('APP_URL') . '/' . $user->id . '/edit'])
 Editar Perfil
 @endcomponent
 <br />
@@ -20,7 +20,7 @@ Saludos.
 Equipo {{ config('app.name') }}.
 @component('mail::subcopy')
 Si tiene problemas al hacer click en el botón, copie y pegue el siguiente enlace en su navegador
-<a url="{{ '/login' }}" target="_blank">{{ getenv('APP_URL') . '/login' }}</a>
+<a url="{{ '/login' }}" target="_blank">{{ getenv('APP_URL') . '/' . $user->id . '/edit' }}</a>
 @endcomponent
 
 @endcomponent
