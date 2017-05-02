@@ -79,7 +79,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $password = str_random(15);
-        $request->request->add(['password' => bcrypt($password)]);
+        $request->request->add(['password' => $password]);
         DB::beginTransaction();
 
         try
