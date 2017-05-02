@@ -2,14 +2,14 @@
 
 namespace ProChile\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
-use ProChile\Http\Requests\UserRequest;
 use ProChile\Role;
 use ProChile\User;
 use ProChile\Mail\SignUp;
 use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use ProChile\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {

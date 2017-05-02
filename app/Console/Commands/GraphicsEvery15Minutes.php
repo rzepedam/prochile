@@ -4,6 +4,7 @@ namespace ProChile\Console\Commands;
 
 use ProChile\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class GraphicsEvery15Minutes extends Command
 {
