@@ -2,6 +2,7 @@
 
 namespace ProChile\Console\Commands;
 
+use Carbon\Carbon;
 use ProChile\City;
 use Illuminate\Console\Command;
 
@@ -29,7 +30,7 @@ class AddCityCommand extends Command
     public function handle()
     {
         City::create([
-            'name' => "New City is added"
+            'name' => "New City is added at: " . Carbon::now()
         ]);
     }
 }
