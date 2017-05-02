@@ -44,6 +44,11 @@
                     <i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span>
                 </a>
             </li>
+            <li class="{{ (Request::is('companies') ? 'active' : '') }}">
+                <a href="{{ url('/companies') }}">
+                    <i class="fa fa-building-o" aria-hidden="true"></i> <span class="nav-label">Empresas</span>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

@@ -80,6 +80,7 @@ class UserController extends Controller
     {
         $password = str_random(15);
         $request->request->add(['password' => $password]);
+        $request->request->add(['user_id' => auth()->id()]);
         DB::beginTransaction();
 
         try
@@ -133,6 +134,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
+        $request->request->add(['user_id' => auth()->id()]);
         DB::beginTransaction();
         try
         {

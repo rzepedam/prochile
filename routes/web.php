@@ -10,6 +10,8 @@ Route::group(['middleware' => 'auth'], function ()
     Route::get('/logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
     Route::resource('assistances', 'AssistanceController');
     Route::resource('users', 'UserController');
+    Route::resource('companies', 'CompanyController');
+
 
     // Ajax request
     Route::get('/loadIndustries', 'AjaxController@loadIndustries');

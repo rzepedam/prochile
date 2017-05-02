@@ -40,17 +40,17 @@ $factory->define(ProChile\City::class, function (Faker\Generator $faker)
     ];
 });
 
-$factory->define(ProChile\Country::class, function (Faker\Generator $faker)
-{
-    return [
-        'name' => $faker->word
-    ];
-});
-
 $factory->define(ProChile\Company::class, function (Faker\Generator $faker)
 {
     return [
         'name' => $faker->company
+    ];
+});
+
+$factory->define(ProChile\Country::class, function (Faker\Generator $faker)
+{
+    return [
+        'name' => $faker->word
     ];
 });
 
