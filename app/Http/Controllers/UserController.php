@@ -5,7 +5,6 @@ namespace ProChile\Http\Controllers;
 use ProChile\Role;
 use ProChile\User;
 use ProChile\Mail\SignUp;
-use Illuminate\Http\Request;
 use ProChile\Mail\UpdateProfile;
 use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;

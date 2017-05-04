@@ -9,6 +9,7 @@ use ProChile\Industry;
 use ProChile\Assistance;
 use ProChile\TypeAssistance;
 use Illuminate\Log\Writer as Log;
+use ProChile\Notifications\WelcomeSMS;
 use ProChile\Http\Requests\AssistanceRequest;
 
 class AssistanceController extends Controller
@@ -118,7 +119,8 @@ class AssistanceController extends Controller
         $request->request->add(['user_id' => auth()->id()]);
         try
         {
-            $this->assistance->create($request->all());
+            $assistance = $this->assistance->create($request->all());
+            $assistance->notify(new WelcomeSMS($assistance));               // Sending SMS (only test)
 
             return ['status' => true, 'url' => '/assistances'];
         } catch ( \Exception $e )
@@ -168,13 +170,15 @@ class AssistanceController extends Controller
                 ->with(['city', 'company', 'country', 'industry', 'typeAssistance'])
                 ->findOrFail($id);
 
-            $cities          = $this->city->pluck('name', 'id');
+            $citiesAux       = $this->city->get();
+            $cities          = $citiesAux->pluck('name', 'id');
+            $countries       = $this->country->pluck('name', 'id');
             $companies       = $this->company->pluck('name', 'id');
-            $industries      = $this->industry->pluck('name', 'id');
+            $industries      = $this->industry->where('city_id', $assistance->city_id)->pluck('name', 'id');
             $typeAssistances = $this->typeAssistances->pluck('name', 'id');
 
             return view('assistances.edit', compact(
-                'assistance', 'cities', 'companies', 'industries', 'typeAssistances'
+                'assistance', 'cities', 'countries', 'companies', 'industries', 'typeAssistances'
             ));
         } catch ( \Exception $e )
         {
@@ -200,7 +204,7 @@ class AssistanceController extends Controller
             $assistance = $this->assistance->findOrFail($id);
             $assistance->update($request->all());
 
-            return ['status' => true];
+            return ['status' => true, 'url' => '/assistances'];
         } catch ( \Exception $e )
         {
             $this->log->error("Error Update Assistance: " . $e->getMessage());

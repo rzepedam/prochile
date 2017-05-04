@@ -12,7 +12,6 @@ Route::group(['middleware' => 'auth'], function ()
     Route::resource('users', 'UserController');
     Route::resource('companies', 'CompanyController');
 
-
     // Ajax request
     Route::get('/loadIndustries', 'AjaxController@loadIndustries');
 });

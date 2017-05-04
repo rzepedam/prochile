@@ -29,9 +29,9 @@
                 {{--@include('layouts.partials.footer')--}}
 
             </div>
-
         </div>
 
+        @include('layouts.toastr.success')
         <script src="{{ mix('js/inspinia.js') }}" type="text/javascript"></script>
         @yield('scripts')
 

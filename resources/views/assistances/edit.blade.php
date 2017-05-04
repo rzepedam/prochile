@@ -11,16 +11,49 @@
 
 @section('content')
 
-    {{ Form::model($assistance, ['route' => ['assistances.update', $assistance]]) }}
+    @include('layouts.messages.error')
 
-        <div class="ibox float-e-margins animated fadeInRight">
-            <div class="ibox-content">
+    <div class="section animated fadeInRight">
+        {{ Form::model($assistance, ['route' => ['assistances.update', $assistance], 'method' => 'PUT', 'id' => 'form-submit']) }}
 
-                @include('assistances.partials.fields')
+            <article class="message is-primary">
+                <div class="message-header">&nbsp;</div>
+                    <div class="message-body">
 
+                        @include('assistances.partials.fields')
+
+                    </div>
+                <div class="message-footer">&nbsp;</div>
+            </article>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{ route('assistances.index') }}">
+                        <i class="fa fa-mail-reply"></i> Volver
+                    </a>
+                    <div id="spinner" class="sk-spinner sk-spinner-cube-grid pull-right hide">
+                        <div class="sk-cube"></div>
+                        <div class="sk-cube"></div>
+                        <div class="sk-cube"></div>
+                        <div class="sk-cube"></div>
+                        <div class="sk-cube"></div>
+                        <div class="sk-cube"></div>
+                        <div class="sk-cube"></div>
+                        <div class="sk-cube"></div>
+                        <div class="sk-cube"></div>
+                    </div>
+                    <button id="btnSubmit" type="submit" class="btn btn-primary pull-right">
+                        <i class="mdi mdi-floppy"></i> Actualizar
+                    </button>
+                </div>
             </div>
-        </div>
 
-    {{ Form::close() }}
+        {{ Form::close() }}
+    </div>
 
+@stop
+
+@section('scripts')
+    <script type="text/javascript" src="{{ mix('js/create-edit.js') }}"></script>
+    <script type="text/javascript" src="{{ mix('js/assistances/create-edit.js') }}"></script>
 @stop

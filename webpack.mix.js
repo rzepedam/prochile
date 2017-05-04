@@ -39,7 +39,7 @@ mix.options({ processCssUrls: false });
 
 // Index
     mix.scripts([
-        'resources/assets/utilities/delete.js',
+        'resources/assets/utilities/delete.js'
     ], 'public/js/index.js');
 
 // Assistances

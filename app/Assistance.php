@@ -4,9 +4,12 @@ namespace ProChile;
 
 use ProChile\Http\Helpers\Helper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Assistance extends Model
 {
+    use Notifiable;
+
     /**
      * @var array
      */
@@ -44,6 +47,18 @@ class Assistance extends Model
     {
         return $this->belongsTo(Country::class);
     }
+
+
+    /**
+     * Route notifications for the Nexmo channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForNexmo()
+    {
+        return $this->phone;
+    }
+
 
     /**
      * @param string $value

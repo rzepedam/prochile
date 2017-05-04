@@ -68,17 +68,19 @@ class AssistanceRequest extends FormRequest
 
             case 'PUT':
             {
-                /*return [
-                    'company_id'     => ['required', 'exists:companies,id'],
-                    'industry_id'    => ['required', 'exists:industries,id'],
-                    'rut'            => ['required', 'unique:assistances,rut,' . $this->route->parameter('assistance')],
-                    'male_surname'   => ['required'],
-                    'female_surname' => ['required'],
-                    'first_name'     => ['required'],
-                    'country_id'     => ['required', 'exists:countries,id'],
-                    'phone'          => ['required'],
-                    'email'          => ['required', 'email', 'unique:assistances,email,' . $this->route->parameter('assistance')]
-                ];*/
+                return [
+                    'type_assistance_id' => ['required', 'in:1,2,3'],
+                    'city_id'            => ['required', 'exists:cities,id'],
+                    'company_id'         => ['required', 'exists:companies,id'],
+                    'industry_id'        => ['required', 'exists:industries,id'],
+                    'rut'                => ['required', 'unique:assistances,rut,' . $this->route->parameter('assistance')],
+                    'first_name'         => ['required'],
+                    'male_surname'       => ['required'],
+                    'female_surname'     => ['required'],
+                    'country_id'         => ['required', 'exists:countries,id'],
+                    'phone'              => ['required'],
+                    'email'              => ['required', 'email', 'unique:assistances,email,' . $this->route->parameter('assistance')]
+                ];
             }
         }
     }

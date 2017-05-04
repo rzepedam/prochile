@@ -13,12 +13,10 @@ class Company extends Model
         'user_id', 'name'
     ];
 
+
     /**
-     * @var bool
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public $timestamps = false;
-
-
     public function user()
     {
         return $this->belongsTo(Company::class);
