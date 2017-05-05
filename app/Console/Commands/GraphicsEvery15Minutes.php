@@ -29,7 +29,7 @@ class GraphicsEvery15Minutes extends Command
      */
     public function handle()
     {
-        $users = User::whereIn('role_id', [2, 3])->get(['email']);
+        $users = User::whereIn('role_id', [1, 2, 3])->get(['email']);
 
         Mail::to($users)->send(new \ProChile\Mail\TestSchedule($users));
     }

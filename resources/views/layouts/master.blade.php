@@ -31,9 +31,8 @@
             </div>
         </div>
 
-        @include('layouts.toastr.success')
         <script src="{{ mix('js/inspinia.js') }}" type="text/javascript"></script>
         @yield('scripts')
-
+        @include('layouts.toastr.success')
     </body>
 </html>

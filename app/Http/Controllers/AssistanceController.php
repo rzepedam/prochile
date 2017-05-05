@@ -5,11 +5,12 @@ namespace ProChile\Http\Controllers;
 use ProChile\City;
 use ProChile\Company;
 use ProChile\Country;
+use ProChile\Biometry;
 use ProChile\Industry;
 use ProChile\Assistance;
 use ProChile\TypeAssistance;
 use Illuminate\Log\Writer as Log;
-use ProChile\Notifications\WelcomeSMS;
+use Illuminate\Support\Facades\DB;
 use ProChile\Http\Requests\AssistanceRequest;
 
 class AssistanceController extends Controller
@@ -18,6 +19,11 @@ class AssistanceController extends Controller
      * @var Assistance
      */
     protected $assistance;
+
+    /**
+     * @var Biometry
+     */
+    protected $biometry;
 
     /**
      * @var City
@@ -53,6 +59,7 @@ class AssistanceController extends Controller
      * AssistanceController constructor.
      *
      * @param Assistance $assistance
+     * @param Biometry $biometry
      * @param City $city
      * @param Company $company
      * @param Country $country
@@ -60,12 +67,13 @@ class AssistanceController extends Controller
      * @param Log $log
      * @param TypeAssistance $typeAssistances
      */
-    public function __construct(Assistance $assistance, City $city, Company $company, Country $country,
+    public function __construct(Assistance $assistance, Biometry $biometry, City $city, Company $company, Country $country,
         Industry $industry, Log $log, TypeAssistance $typeAssistances)
     {
         $this->middleware(['auth']);
 
         $this->assistance      = $assistance;
+        $this->biometry        = $biometry;
         $this->city            = $city;
         $this->company         = $company;
         $this->country         = $country;
@@ -117,15 +125,20 @@ class AssistanceController extends Controller
     public function store(AssistanceRequest $request)
     {
         $request->request->add(['user_id' => auth()->id()]);
+        DB::beginTransaction();
+
         try
         {
             $assistance = $this->assistance->create($request->all());
-            $assistance->notify(new WelcomeSMS($assistance));               // Sending SMS (only test)
+            $this->biometry->create($assistance);
+            DB::commit();
+            session()->flash('message', 'El registro fue almacenado satisfactoriamente.');
 
             return ['status' => true, 'url' => '/assistances'];
         } catch ( \Exception $e )
         {
             $this->log->error("Error Store Assistance: " . $e->getMessage());
+            DB::rollback();
 
             return ['status' => false];
         }
@@ -203,6 +216,7 @@ class AssistanceController extends Controller
         {
             $assistance = $this->assistance->findOrFail($id);
             $assistance->update($request->all());
+            session()->flash('message', 'El registro fue actualizado satisfactoriamente.');
 
             return ['status' => true, 'url' => '/assistances'];
         } catch ( \Exception $e )

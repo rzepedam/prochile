@@ -5,8 +5,12 @@ function validaEmail(email) {
 }
 
 $("#email").on('change', function () {
-    if ( ! validaEmail($(this).val()) ) {
-        toastr.error('Verifique que el email ha sido ingresado correctamente', 'Email Incorrecto');
+    if (!validaEmail($(this).val())) {
+        toastr.error('Verifique que el email ha sido ingresado correctamente', 'Email Incorrecto', {
+            "closeButton": true,
+            "progressBar": true,
+            "timeOut": "2000"
+        });
         $(this).focus();
     }
 });

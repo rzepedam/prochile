@@ -87,6 +87,7 @@ class UserController extends Controller
             $user = $this->user->create($request->all());
             Mail::to($user)->queue(new SignUp($password, $user));   // Sending email with credentials...
             DB::commit();
+            session()->flash('message', 'El registro fue almacenado satisfactoriamente.');
 
             return ['status' => true, 'url' => '/users'];
         } catch ( \Exception $e )

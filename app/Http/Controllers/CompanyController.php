@@ -69,6 +69,7 @@ class CompanyController extends Controller
         try
         {
             $this->company->create($request->all());
+            session()->flash('message', 'El registro fue almacenado satisfactoriamente.');
 
             return ['status' => true, 'url' => '/companies'];
         } catch ( \Exception $e )
