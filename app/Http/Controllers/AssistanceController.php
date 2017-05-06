@@ -2,16 +2,20 @@
 
 namespace ProChile\Http\Controllers;
 
+use function GuzzleHttp\Psr7\str;
 use ProChile\City;
 use ProChile\Company;
 use ProChile\Country;
 use ProChile\Biometry;
 use ProChile\Industry;
 use ProChile\Assistance;
+use Illuminate\Http\Request;
 use ProChile\TypeAssistance;
 use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use ProChile\Http\Requests\AssistanceRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AssistanceController extends Controller
 {
@@ -90,7 +94,7 @@ class AssistanceController extends Controller
     public function index()
     {
         $assistances = $this->assistance
-            ->with(['city', 'company', 'country', 'industry', 'typeAssistance', 'user'])
+            ->with(['city', 'company', 'country', 'industry', 'typeAssistance'])
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
 
@@ -205,13 +209,56 @@ class AssistanceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param AssistanceRequest $request
+     * @param Request $request
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(AssistanceRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        if ( \Route::is('apiUpdatePhotoAssistance') )
+        {
+            $this->validate($request, [
+                'photo' => ['required'],
+            ]);
+
+            try
+            {
+                $assistance        = $this->assistance->findOrFail($id);
+                $assistance->photo = $request->get('photo');
+                $assistance->save();
+
+                return response()->json(['updated' => 'Resource updated successfully'], 200);
+            } catch ( \Exception $e )
+            {
+                $this->log->error("Error apiUpdatePhotoUser User: " . $e->getMessage());
+
+                if ( $e instanceof ModelNotFoundException )
+                {
+                    $e = new NotFoundHttpException($e->getMessage(), $e);
+
+                    return \Response::json(['error' => 'Model not found'], 404);
+                }
+
+                return response()->json(['status' => false], 500);
+            }
+        }
+
+        $request['rut'] = str_replace('.', '', $request->get('rut'));
+        $this->validate($request, [
+            'type_assistance_id' => ['required', 'in:1,2,3'],
+            'city_id'            => ['required', 'exists:cities,id'],
+            'company_id'         => ['required', 'exists:companies,id'],
+            'industry_id'        => ['required', 'exists:industries,id'],
+            'rut'                => ['required', 'unique:assistances,rut,' . $id],
+            'first_name'         => ['required'],
+            'male_surname'       => ['required'],
+            'female_surname'     => ['required'],
+            'country_id'         => ['required', 'exists:countries,id'],
+            'phone'              => ['required'],
+            'email'              => ['required', 'email', 'unique:assistances,email,' . $id]
+        ]);
+
         $request->request->add(['user_id' => auth()->id()]);
         try
         {
@@ -237,15 +284,20 @@ class AssistanceController extends Controller
      */
     public function destroy($id)
     {
+        DB::beginTransaction();
+
         try
         {
             $assistance = $this->assistance->findOrFail($id);
+            $this->biometry->delete($assistance);
             $assistance->delete();
+            DB::commit();
 
             return response()->json(['status' => true]);
         } catch ( \Exception $e )
         {
             $this->log->error('Error Delete Assistance: ' . $e->getMessage());
+            DB::rollback();
 
             return response()->json(['status' => false]);
         }

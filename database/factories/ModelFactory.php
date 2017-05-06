@@ -18,7 +18,7 @@ $factory->define(ProChile\Assistance::class, function (Faker\Generator $faker)
         'first_name'         => $firstName,
         'male_surname'       => $maleSurname,
         'female_surname'     => $faker->lastName,
-        'country_id'         => factory('ProChile\Country')->create()->id,
+        'country_id'         => rand(1, 9),
         'phone'              => $faker->e164PhoneNumber,
         'email'              => $email,
     ];

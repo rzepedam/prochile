@@ -15,5 +15,5 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => 'auth:api'], function ()
 {
-    Route::put('/users/{id}', ['as' => 'apiUpdatePhotoUser', 'uses' => 'UserController@update']);
+    Route::put('/assistances/{id}', ['as' => 'apiUpdatePhotoAssistance', 'uses' => 'AssistanceController@update']);
 });

@@ -22,6 +22,20 @@ class Biometry
     }
 
     /**
+     * @return \Psr\Http\Message\StreamInterface
+     */
+    public function all()
+    {
+        return json_decode($this->client->post('getPeopleForClient/', [
+            'form_params' => [
+                'secret_key' => env('BIOMETRY_KEY'),
+                'client'     => env('BIOMETRY_CLIENT'),
+                'place'      => env('BIOMETRY_PLACE'),
+            ],
+        ])->getBody());
+    }
+
+    /**
      * @param $assistance
      */
     public function create($assistance)
@@ -44,13 +58,14 @@ class Biometry
      */
     public function delete($assistance)
     {
-        $this->client->post('createOrUpdatePerson', [
+        $rut = str_replace('.', '', $assistance->rut);
+        $this->client->post('createOrUpdatePerson/', [
             'form_params' => [
                 'secret_key' => env('BIOMETRY_KEY'),
                 'client'     => env('BIOMETRY_CLIENT'),
                 'place'      => env('BIOMETRY_PLACE'),
-                'action'   => 'delete',
-                'passport' => $assistance->rut,
+                'action'     => 'delete',
+                'passport'   => $rut,
             ],
         ])->getBody();
     }

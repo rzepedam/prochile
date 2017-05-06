@@ -49,6 +49,11 @@
                     <i class="fa fa-building-o" aria-hidden="true"></i> <span class="nav-label">Empresas</span>
                 </a>
             </li>
+            <li class="{{ (Request::is('biometries') ? 'active' : '') }}">
+                <a href="{{ url('/biometries') }}">
+                    <i class="fa fa-tablet" aria-hidden="true"></i> <span class="nav-label">Biometry</span>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

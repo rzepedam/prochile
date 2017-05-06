@@ -14,6 +14,7 @@ Route::group(['middleware' => 'auth'], function ()
     Route::resource('/assistances', 'AssistanceController');
     Route::resource('/users', 'UserController');
     Route::resource('/companies', 'CompanyController');
+    Route::resource('/biometries', 'BiometryController');
 
     // Ajax request
     Route::get('/loadIndustries', 'AjaxController@loadIndustries');

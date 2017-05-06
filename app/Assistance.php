@@ -3,19 +3,20 @@
 namespace ProChile;
 
 use ProChile\Http\Helpers\Helper;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
 class Assistance extends Model
 {
-    use Notifiable;
+    use Notifiable, HasApiTokens;
 
     /**
      * @var array
      */
     protected $fillable   = [
         'user_id', 'type_assistance_id', 'city_id', 'company_id', 'industry_id', 'first_name',
-        'male_surname', 'female_surname', 'country_id', 'rut', 'phone', 'email'
+        'male_surname', 'female_surname', 'country_id', 'rut', 'phone', 'email', 'photo'
     ];
 
     public function typeAssistance()

@@ -27,6 +27,7 @@ class CreateAssistancesTable extends Migration
             $table->string('rut')->unique();
             $table->string('phone');
             $table->string('email')->unique();
+            $table->string('photo')->default('/img/prochile.png');
             $table->timestamps();
         });
     }

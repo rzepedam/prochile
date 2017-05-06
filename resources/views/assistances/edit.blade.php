@@ -31,16 +31,9 @@
                     <a href="{{ route('assistances.index') }}">
                         <i class="fa fa-mail-reply"></i> Volver
                     </a>
-                    <div id="spinner" class="sk-spinner sk-spinner-cube-grid pull-right hide">
-                        <div class="sk-cube"></div>
-                        <div class="sk-cube"></div>
-                        <div class="sk-cube"></div>
-                        <div class="sk-cube"></div>
-                        <div class="sk-cube"></div>
-                        <div class="sk-cube"></div>
-                        <div class="sk-cube"></div>
-                        <div class="sk-cube"></div>
-                        <div class="sk-cube"></div>
+                    <div id="spinner" class="sk-spinner sk-spinner-double-bounce hide pull-right">
+                        <div class="sk-double-bounce1"></div>
+                        <div class="sk-double-bounce2"></div>
                     </div>
                     <button id="btnSubmit" type="submit" class="btn btn-primary pull-right">
                         <i class="mdi mdi-floppy"></i> Actualizar

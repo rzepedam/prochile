@@ -41,7 +41,7 @@
             $('.showModal').on('click', function() {
                 var object = JSON.parse($(this).attr('data-object'));
 
-                $('#modalImage').attr('src', object['user']['photo']);
+                $('#modalImage').attr('src', object['photo']);
                 $('#modalName').text(object['first_name'] + ' ' + object['male_surname'] + ' ' + object['female_surname']);
                 $('#modalEmail').text(object['email']);
                 $('#modalTypeAssistance').text(object['type_assistance']['name']);
