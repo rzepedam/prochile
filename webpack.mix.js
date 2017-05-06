@@ -55,7 +55,12 @@ mix.options({ processCssUrls: false });
     // Create-Edit
         mix.scripts('resources/assets/utilities/valida_email.js', 'public/js/users/create-edit.js');
 
+// Passport
+    mix.copy('resources/assets/passport/app.css', 'public/css/passport.css');
+    mix.copy('resources/assets/passport/app.js', 'public/js/passport.js');
+
 // Versioning
     mix.version();
+
 
 

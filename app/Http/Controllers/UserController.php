@@ -2,14 +2,18 @@
 
 namespace ProChile\Http\Controllers;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use ProChile\Role;
 use ProChile\User;
 use ProChile\Mail\SignUp;
+use Illuminate\Http\Request;
 use ProChile\Mail\UpdateProfile;
 use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 use ProChile\Http\Requests\UserRequest;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends Controller
 {
@@ -127,18 +131,48 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param UserRequest $request
+     * @param Request $request
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        if ( Route::is('apiUpdatePhotoUser') )
+        {
+            $this->validate($request, [
+                'photo' => ['required'],
+            ]);
+
+            try
+            {
+                $user        = $this->user->findOrFail($id);
+                $user->photo = $request->get('photo');
+                $user->save();
+
+                return response()->json(['status' => true]);
+            } catch ( \Exception $e )
+            {
+                $this->log->error("Error apiUpdatePhotoUser User: " . $e->getMessage());
+
+                return response()->json(['status' => false], 500);
+            }
+        }
+
+        $this->validate($request, [
+            'role_id'               => ['required', 'in:1,2,3,4'],
+            'first_name'            => ['required'],
+            'male_surname'          => ['required'],
+            'password'              => ['required', 'confirmed'],
+            'password_confirmation' => ['required'],
+            'email'                 => ['required', 'email', 'unique:users,email,' . $id]
+        ]);
+
         $request->request->add(['user_id' => auth()->id()]);
         DB::beginTransaction();
         try
         {
-            $user  = $this->user->with(['role'])->findOrFail($id);
+            $user = $this->user->with(['role'])->findOrFail($id);
             $user->update($request->all());
             Mail::to($user)->send(new UpdateProfile($user));   // Sending email update profile...
             DB::commit();

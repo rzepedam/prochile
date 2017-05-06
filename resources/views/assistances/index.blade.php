@@ -10,6 +10,8 @@
 
 @section('content')
 
+    @include('layouts.messages.error')
+
     <div class="row animated fadeInRight">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
@@ -39,7 +41,7 @@
             $('.showModal').on('click', function() {
                 var object = JSON.parse($(this).attr('data-object'));
 
-                $('#modalImage').attr('src', object['photo']);
+                $('#modalImage').attr('src', object['user']['photo']);
                 $('#modalName').text(object['first_name'] + ' ' + object['male_surname'] + ' ' + object['female_surname']);
                 $('#modalEmail').text(object['email']);
                 $('#modalTypeAssistance').text(object['type_assistance']['name']);

@@ -14,8 +14,8 @@ class Assistance extends Model
      * @var array
      */
     protected $fillable   = [
-        'user_id', 'type_assistance_id', 'city_id', 'company_id', 'industry_id', 'first_name', 'male_surname',
-        'female_surname', 'country_id', 'rut', 'phone', 'email', 'photo'
+        'user_id', 'type_assistance_id', 'city_id', 'company_id', 'industry_id', 'first_name',
+        'male_surname', 'female_surname', 'country_id', 'rut', 'phone', 'email'
     ];
 
     public function typeAssistance()

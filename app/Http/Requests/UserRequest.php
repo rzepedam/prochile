@@ -39,29 +39,11 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        switch ( $this->method() )
-        {
-            case 'POST':
-            {
-                return [
-                    'role_id'      => ['required', 'in:1,2,3,4'],
-                    'first_name'   => ['required'],
-                    'male_surname' => ['required'],
-                    'email'        => ['required', 'email', 'unique:users,email']
-                ];
-            }
-
-            case 'PUT':
-            {
-                return [
-                    'role_id'               => ['required', 'in:1,2,3,4'],
-                    'first_name'            => ['required'],
-                    'male_surname'          => ['required'],
-                    'password'              => ['required', 'confirmed'],
-                    'password_confirmation' => ['required'],
-                    'email'                 => ['required', 'email', 'unique:users,email,' . $this->route->parameter('user')]
-                ];
-            }
-        }
+        return [
+            'role_id'      => ['required', 'in:1,2,3,4'],
+            'first_name'   => ['required'],
+            'male_surname' => ['required'],
+            'email'        => ['required', 'email', 'unique:users,email']
+        ];
     }
 }

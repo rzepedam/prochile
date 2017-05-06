@@ -89,7 +89,8 @@ class AssistanceController extends Controller
      */
     public function index()
     {
-        $assistances = $this->assistance->with(['city', 'company', 'country', 'industry', 'typeAssistance'])
+        $assistances = $this->assistance
+            ->with(['city', 'company', 'country', 'industry', 'typeAssistance', 'user'])
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
 

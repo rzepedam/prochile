@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->put('/updatePhoto', function (Request $request) {
-    return 'success';
+Route::group(['middleware' => 'auth:api'], function ()
+{
+    Route::put('/users/{id}', ['as' => 'apiUpdatePhotoUser', 'uses' => 'UserController@update']);
 });
