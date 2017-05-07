@@ -2,7 +2,6 @@
 
 namespace ProChile\Http\Controllers;
 
-use function GuzzleHttp\Psr7\str;
 use ProChile\City;
 use ProChile\Company;
 use ProChile\Country;
@@ -232,12 +231,11 @@ class AssistanceController extends Controller
             } catch ( \Exception $e )
             {
                 $this->log->error("Error apiUpdatePhotoUser User: " . $e->getMessage());
-
                 if ( $e instanceof ModelNotFoundException )
                 {
                     $e = new NotFoundHttpException($e->getMessage(), $e);
 
-                    return \Response::json(['error' => 'Model not found'], 404);
+                    return response()->json(['error' => 'Model not found'], 404);
                 }
 
                 return response()->json(['status' => false], 500);

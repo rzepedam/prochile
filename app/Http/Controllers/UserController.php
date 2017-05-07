@@ -37,6 +37,8 @@ class UserController extends Controller
      */
     public function __construct(Log $log, Role $role, User $user)
     {
+        $this->middleware('isVerified', ['only' => ['edit', 'update']]);
+
         $this->log  = $log;
         $this->role = $role;
         $this->user = $user;

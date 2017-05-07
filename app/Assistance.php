@@ -19,36 +19,62 @@ class Assistance extends Model
         'male_surname', 'female_surname', 'country_id', 'rut', 'phone', 'email', 'photo'
     ];
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function typeAssistance()
     {
         return $this->belongsTo(TypeAssistance::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function city()
     {
         return $this->belongsTo(City::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function company()
     {
         return $this->belongsTo(Company::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function industry()
     {
         return $this->belongsTo(Industry::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function country()
     {
         return $this->belongsTo(Country::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
 
     /**
      * Route notifications for the Nexmo channel.
@@ -109,5 +135,13 @@ class Assistance extends Model
     public function getRutAttribute($value)
     {
         return Helper::rut($value);
+    }
+
+    /**
+     * @return string 'Alfonso Romero López'
+     */
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->male_surname . ' ' . $this->female_surname;
     }
 }

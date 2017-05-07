@@ -15,18 +15,22 @@ class RoleTableSeeder extends Seeder
         DB::table('roles')->truncate();
 
         \ProChile\Role::create([
+            'acr'  => 'cqtime',
             'name' => 'Controlqtime'
         ]);
 
         \ProChile\Role::create([
+            'acr'  => 'dir_nac',
             'name' => 'Director Nacional'
         ]);
 
         \ProChile\Role::create([
+            'acr'  => 'dir_reg',
             'name' => 'Director Regional'
         ]);
 
         \ProChile\Role::create([
+            'acr'  => 'staff',
             'name' => 'Staff'
         ]);
     }

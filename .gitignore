@@ -9,3 +9,4 @@
 public/mix-manifest.json
 storage/oauth-private.key
 storage/oauth-public.key
+!/resources/views/attendances/index.blade.php

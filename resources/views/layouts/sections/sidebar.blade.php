@@ -26,7 +26,7 @@
             </li>
             <li class="{{ (Request::is('/') ? 'active' : '') }}">
                 <a href="{{ url('/') }}">
-                    <i class="fa fa-line-chart" aria-hidden="true"></i> <span class="nav-label">Gráficas</span>
+                    <i class="fa fa-line-chart" aria-hidden="true"></i> <span class="nav-label">Reportes</span>
                 </a>
             </li>
             <li class="{{ (Request::is('assistances') ? 'active' : '') }}">
@@ -34,14 +34,9 @@
                     <i class="fa fa-street-view" aria-hidden="true"></i> <span class="nav-label">Asistentes</span>
                 </a>
             </li>
-            <li class="">
-                <a href="javascript:void(0)">
+            <li class="{{ (Request::is('attendances') ? 'active' : '') }}">
+                <a href="{{ url('/attendances') }}">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="nav-label">Registro de Asistencia</span>
-                </a>
-            </li>
-            <li class="{{ (Request::is('users') ? 'active' : '') }}">
-                <a href="{{ url('/users') }}">
-                    <i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span>
                 </a>
             </li>
             <li class="{{ (Request::is('companies') ? 'active' : '') }}">
@@ -49,11 +44,18 @@
                     <i class="fa fa-building-o" aria-hidden="true"></i> <span class="nav-label">Empresas</span>
                 </a>
             </li>
-            <li class="{{ (Request::is('biometries') ? 'active' : '') }}">
-                <a href="{{ url('/biometries') }}">
-                    <i class="fa fa-tablet" aria-hidden="true"></i> <span class="nav-label">Biometry</span>
-                </a>
-            </li>
+            @if (auth()->user()->role->id == 1)
+                <li class="{{ (Request::is('users') ? 'active' : '') }}">
+                    <a href="{{ url('/users') }}">
+                        <i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span>
+                    </a>
+                </li>
+                <li class="{{ (Request::is('biometries') ? 'active' : '') }}">
+                    <a href="{{ url('/biometries') }}">
+                        <i class="fa fa-tablet" aria-hidden="true"></i> <span class="nav-label">Biometry</span>
+                    </a>
+                </li>
+            @endif
         </ul>
     </div>
 </nav>

@@ -24,6 +24,17 @@ $factory->define(ProChile\Assistance::class, function (Faker\Generator $faker)
     ];
 });
 
+$factory->define(ProChile\Attendance::class, function (Faker\Generator $faker)
+{
+    $assistances = \ProChile\Assistance::get(['id']);
+
+    return [
+        'assistance_id' => $assistances->random(),
+        'rut'           => rand(1, 3),
+        'created_at'    => $faker->dateTimeBetween('-2 hours', 'now'),
+    ];
+});
+
 $factory->define(ProChile\City::class, function (Faker\Generator $faker)
 {
     return [

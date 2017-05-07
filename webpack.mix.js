@@ -42,6 +42,16 @@ mix.options({ processCssUrls: false });
         'resources/assets/utilities/delete.js'
     ], 'public/js/index.js');
 
+// Reports
+    mix.scripts([
+        'node_modules/chart.js/dist/Chart.min.js',
+        'resources/assets/reports/nationality.js',
+        'resources/assets/reports/time_lapse.js',
+        'resources/assets/reports/gender.js',
+        'resources/assets/reports/industry.js',
+        'resources/assets/reports/type_assistance.js',
+    ], 'public/js/reports.js')
+
 // Assistances
     // Create-Edit
         mix.scripts([
