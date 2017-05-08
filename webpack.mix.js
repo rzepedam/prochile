@@ -43,9 +43,11 @@ mix.options({ processCssUrls: false });
     ], 'public/js/index.js');
 
 // Reports
-    mix.scripts([
-        'node_modules/chart.js/dist/Chart.min.js'
-    ], 'public/js/reports.js')
+    mix.copy('resources/assets/utilities/canvas-toBlob.js', 'public/js/canvas-toBlob.js')
+        .scripts([
+            'node_modules/chart.js/dist/Chart.min.js',
+            'node_modules/file-saver/FileSaver.min.js'
+        ], 'public/js/reports.js')
 
 // Assistances
     // Create-Edit

@@ -32,7 +32,6 @@
 @stop
 
 @section('scripts')
-    <script src="/js/FileSaver.min.js"></script>
     <script src="/js/canvas-toBlob.js"></script>
     <script src="{{ mix('/js/reports.js') }}"></script>
     <script type="text/javascript">
