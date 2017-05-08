@@ -179,6 +179,7 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class
     ],
 
     /*
@@ -230,6 +231,7 @@ return [
 
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
     ],
 
 ];
