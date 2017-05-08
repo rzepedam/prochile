@@ -14,7 +14,7 @@ class AttendanceTableSeeder extends Seeder
     {
         DB::table('attendances')->truncate();
 
-        if ( getenv('APP_ENV') === 'local' )
+        if ( getenv('APP_ENV') === 'local' || getenv('APP_ENV') === 'production')
         {
             factory('ProChile\Attendance', 100)->create();
         }
