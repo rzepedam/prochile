@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth'], function ()
         Route::get('/users', ['as' => 'users.index', 'uses' => 'UserController@index']);
         Route::get('/users/create', ['as' => 'users.create', 'uses' => 'UserController@create']);
         Route::post('/users', ['as' => 'users.store', 'uses' => 'UserController@store']);
+        Route::delete('/users/{id}', ['as' => 'users.destroy', 'uses' => 'UserController@destroy']);
 
         // Biometry
         Route::resource('/biometries', 'BiometryController');
