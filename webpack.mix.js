@@ -44,12 +44,7 @@ mix.options({ processCssUrls: false });
 
 // Reports
     mix.scripts([
-        'node_modules/chart.js/dist/Chart.min.js',
-        'resources/assets/reports/nationality.js',
-        'resources/assets/reports/time_lapse.js',
-        'resources/assets/reports/gender.js',
-        'resources/assets/reports/industry.js',
-        'resources/assets/reports/type_assistance.js',
+        'node_modules/chart.js/dist/Chart.min.js'
     ], 'public/js/reports.js')
 
 // Assistances

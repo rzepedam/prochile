@@ -251,6 +251,10 @@ autoprefixer@^6.7.3:
     postcss "^5.2.16"
     postcss-value-parser "^3.2.3"
 
+awesome-bootstrap-checkbox@^1.0.0-alpha.5:
+  version "1.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/awesome-bootstrap-checkbox/-/awesome-bootstrap-checkbox-1.0.0-alpha.5.tgz#359db3d5ab1da7c1dffde6f90ab19ca6bc4ae14f"
+
 aws-sign2@~0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"

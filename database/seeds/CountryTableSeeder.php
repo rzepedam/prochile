@@ -48,5 +48,9 @@ class CountryTableSeeder extends Seeder
         ProChile\Country::create([
             'name' => 'Venezuela'
         ]);
+
+        ProChile\Country::create([
+            'name' => 'Otra'
+        ]);
     }
 }

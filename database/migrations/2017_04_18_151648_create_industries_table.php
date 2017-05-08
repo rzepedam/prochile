@@ -17,6 +17,7 @@ class CreateIndustriesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('city_id');
             $table->string('name');
+            $table->string('acr');
         });
     }
 

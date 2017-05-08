@@ -15,52 +15,62 @@ class IndustryTableSeeder extends Seeder
 
         ProChile\Industry::create([
             'city_id' => 1,
-            'name'    => 'Compañías Mineras'
+            'name'    => 'Compañías Mineras',
+            'acr'     => 'Com. Min.'
         ]);
 
         ProChile\Industry::create([
             'city_id' => 1,
-            'name'    => 'Empresas locales proveedoras de la minería'
+            'name'    => 'Empresas locales proveedoras de la minería',
+            'acr'     => 'Emp. Prov. Min.'
         ]);
 
         ProChile\Industry::create([
             'city_id' => 1,
-            'name'    => 'Servicios profesionales: Proveedores para la Construcción'
+            'name'    => 'Servicios profesionales: Proveedores para la Construcción',
+            'acr'     => 'Serv. Prof.'
         ]);
 
         ProChile\Industry::create([
             'city_id' => 1,
-            'name'    => 'Servicios para la Ingeniería'
+            'name'    => 'Servicios para la Ingeniería',
+            'acr'     => 'Serv. Ing.'
         ]);
 
         ProChile\Industry::create([
             'city_id' => 2,
-            'name'    => 'Alimentos Funcionales y Gourmet'
+            'name'    => 'Alimentos Funcionales y Gourmet',
+            'acr'     => 'Ali. Fun. Gou.'
         ]);
 
         ProChile\Industry::create([
             'city_id' => 2,
-            'name'    => 'Carnes'
+            'name'    => 'Carnes',
+            'acr'     => 'Carnes',
         ]);
 
         ProChile\Industry::create([
             'city_id' => 2,
-            'name'    => 'Madera y máquinas'
+            'name'    => 'Madera y máquinas',
+            'acr'     => 'Mad. y Máq.'
         ]);
 
         ProChile\Industry::create([
             'city_id' => 2,
-            'name'    => 'Productos del Mar: pescados, crustáceos, moluscos, algas'
+            'name'    => 'Productos del Mar: pescados, crustáceos, moluscos, algas',
+            'acr'     => 'Prod. Mar'
         ]);
 
         ProChile\Industry::create([
             'city_id' => 2,
-            'name'    => 'Proveedores para el sector Agropecuario y Agroindustrial'
+            'name'    => 'Proveedores para el sector Agropecuario y Agroindustrial',
+            'acr'     => 'Prov. Agro. y Agroind.'
         ]);
 
         ProChile\Industry::create([
             'city_id' => 2,
-            'name'    => 'Industria Acuícola'
+            'name'    => 'Industria Acuícola',
+            'acr'     => 'Ind. Acuí.'
         ]);
     }
 }

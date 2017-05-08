@@ -18,7 +18,8 @@ $factory->define(ProChile\Assistance::class, function (Faker\Generator $faker)
         'first_name'         => $firstName,
         'male_surname'       => $maleSurname,
         'female_surname'     => $faker->lastName,
-        'country_id'         => rand(1, 9),
+        'is_male'            => $faker->randomElement(['0', '1']),
+        'country_id'         => rand(1, 10),
         'phone'              => $faker->e164PhoneNumber,
         'email'              => $email,
     ];
@@ -26,12 +27,14 @@ $factory->define(ProChile\Assistance::class, function (Faker\Generator $faker)
 
 $factory->define(ProChile\Attendance::class, function (Faker\Generator $faker)
 {
-    $assistances = \ProChile\Assistance::get(['id']);
+    $assistances = \ProChile\Assistance::get(['id', 'rut']);
+    $assistance  = $assistances->random();
+    $date        = mt_rand(\Carbon\Carbon::createFromTime('08', '00', '00')->timestamp, \Carbon\Carbon::createFromTime('09', '00', '00')->timestamp);
 
     return [
-        'assistance_id' => $assistances->random(),
-        'rut'           => rand(1, 3),
-        'created_at'    => $faker->dateTimeBetween('-2 hours', 'now'),
+        'assistance_id' => $assistance,
+        'rut'           => str_replace('.', '', $assistance->rut),
+        'created_at'    => \Carbon\Carbon::createFromFormat('U', $date)->setTimezone("America/Santiago")
     ];
 });
 

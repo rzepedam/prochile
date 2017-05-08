@@ -16,7 +16,7 @@ class Assistance extends Model
      */
     protected $fillable   = [
         'user_id', 'type_assistance_id', 'city_id', 'company_id', 'industry_id', 'first_name',
-        'male_surname', 'female_surname', 'country_id', 'rut', 'phone', 'email', 'photo'
+        'male_surname', 'female_surname', 'is_male', 'country_id', 'rut', 'phone', 'email', 'photo'
     ];
 
 
@@ -117,6 +117,21 @@ class Assistance extends Model
     public function setRutAttribute($value)
     {
         $this->attributes['rut'] = str_replace('.', '', $value);
+    }
+
+    /**
+     * @param $value '0 or 1'
+     *
+     * @return bool
+     */
+    public function setIsMaleAttribute($value)
+    {
+        if ( $value === '1' )
+        {
+            return $this->attributes['is_male'] = true;
+        }
+
+        return $this->attributes['is_male'] = false;
     }
 
     /**

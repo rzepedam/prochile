@@ -21,6 +21,7 @@ class CreateAssistancesTable extends Migration
             $table->unsignedInteger('company_id')->nullable();
             $table->unsignedInteger('industry_id')->nullable();
             $table->unsignedInteger('country_id');
+            $table->boolean('is_male');
             $table->string('first_name');
             $table->string('male_surname');
             $table->string('female_surname');

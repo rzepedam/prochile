@@ -39,6 +39,32 @@
         {{ Form::label('female_surname', 'Apellido Materno') }}
         {{ Form::text('female_surname', null, ['class' => 'form-control']) }}
     </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 form-group margin-0">
+        {{ Form::label('is_male', 'Sexo') }}
+        <ul class="list-unstyled list-inline text-center">
+            <li>
+                <div class="radio-custom radio-primary">
+                    @if (Route::is('assistances.create'))
+                        <input type="radio" id="male" name="is_male" value="1" />
+                    @else
+                        <input type="radio" id="male" name="is_male" value="1" {{ $assistance->is_male ? 'checked' : '' }} />
+                    @endif
+                    <label for="male">Masculino</label>
+                </div>
+            </li>
+            <li></li>
+            <li>
+                <div class="radio-custom radio-primary">
+                    @if (Route::is('assistances.create'))
+                        <input type="radio" id="female" name="is_male" value="0" />
+                    @else
+                        <input type="radio" id="female" name="is_male" value="0" {{ $assistance->is_male ? '' : 'checked' }} />
+                    @endif
+                    <label for="female">Femenino</label>
+                </div>
+            </li>
+        </ul>
+    </div>
     {{-- Nacionalidad select field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
     	{{ Form::label('country_id', 'Nacionalidad') }}
@@ -50,7 +76,7 @@
         {{ Form::text('phone', null, ['class' => 'form-control']) }}
     </div>
     {{-- Email text field --}}
-    <div class="col-xs-12 col-sm-6 col-md-6 form-group">
+    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
         {{ Form::label('email', 'Email') }}
         {{ Form::text('email', null, ['class' => 'form-control', 'id' => 'email']) }}
     </div>
