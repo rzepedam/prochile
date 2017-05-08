@@ -206,6 +206,39 @@ class AssistanceController extends Controller
     }
 
     /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiUpdatePhotoAssistance(Request $request)
+    {
+        $this->validate($request, [
+            'rut'   => ['required'],
+            'photo' => ['required'],
+        ]);
+
+        try
+        {
+            $assistance        = $this->assistance->whereRut($request->get('rut'))->firstOrFail();
+            $assistance->photo = $request->get('photo');
+            $assistance->save();
+
+            return response()->json(['updated' => 'Resource updated successfully'], 200);
+        } catch ( \Exception $e )
+        {
+            $this->log->error("Error apiUpdatePhotoUser User: " . $e->getMessage());
+            if ( $e instanceof ModelNotFoundException )
+            {
+                $e = new NotFoundHttpException($e->getMessage(), $e);
+
+                return response()->json(['error' => 'Model not found'], 404);
+            }
+
+            return response()->json(['status' => false], 500);
+        }
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param Request $request
@@ -215,33 +248,6 @@ class AssistanceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ( \Route::is('apiUpdatePhotoAssistance') )
-        {
-            $this->validate($request, [
-                'photo' => ['required'],
-            ]);
-
-            try
-            {
-                $assistance        = $this->assistance->findOrFail($id);
-                $assistance->photo = $request->get('photo');
-                $assistance->save();
-
-                return response()->json(['updated' => 'Resource updated successfully'], 200);
-            } catch ( \Exception $e )
-            {
-                $this->log->error("Error apiUpdatePhotoUser User: " . $e->getMessage());
-                if ( $e instanceof ModelNotFoundException )
-                {
-                    $e = new NotFoundHttpException($e->getMessage(), $e);
-
-                    return response()->json(['error' => 'Model not found'], 404);
-                }
-
-                return response()->json(['status' => false], 500);
-            }
-        }
-
         $request['rut'] = str_replace('.', '', $request->get('rut'));
         $this->validate($request, [
             'type_assistance_id' => ['required', 'in:1,2,3'],

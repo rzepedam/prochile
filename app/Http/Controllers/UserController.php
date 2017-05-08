@@ -144,8 +144,9 @@ class UserController extends Controller
             $user->update($request->all());
             Mail::to($user)->queue(new UpdateProfile($user));   // Sending email update profile...
             DB::commit();
+            session()->flash('message', 'Perfil Actualizado satisfactoriamente.');
 
-            return ['status' => true, 'url' => '/users'];
+            return ['status' => true, 'url' => '/'];
         } catch ( \Exception $e )
         {
             $this->log->error("Error Update User: " . $e->getMessage());

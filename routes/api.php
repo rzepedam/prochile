@@ -15,6 +15,6 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => 'auth:api'], function ()
 {
-    Route::put('/assistances/{id}', ['as' => 'apiUpdatePhotoAssistance', 'uses' => 'AssistanceController@update']);
+    Route::post('/assistances', ['uses' => 'AssistanceController@apiUpdatePhotoAssistance']);
     Route::post('/attendances', 'AttendanceController@store');
 });

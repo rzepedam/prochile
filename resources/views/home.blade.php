@@ -28,14 +28,34 @@
         <canvas id="type_assistance" height="200"></canvas>
     </div>
     <div class="clearfix"></div>
-
+    <buttton id="save-btn" class="btn btn-primary">Export</buttton>
 @stop
 
 @section('scripts')
+    <script src="/js/FileSaver.min.js"></script>
+    <script src="/js/canvas-toBlob.js"></script>
     <script src="{{ mix('/js/reports.js') }}"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {
+
+            $("#save-btn").click(function() {
+                $("#nationality").get(0).toBlob(function(blob) {
+                    saveAs(blob, "nationality.png");
+                });
+                $("#gender").get(0).toBlob(function(blob) {
+                    saveAs(blob, "gender.png");
+                });
+                $("#time_lapse").get(0).toBlob(function(blob) {
+                    saveAs(blob, "time_lapse.png");
+                });
+                $("#industry").get(0).toBlob(function(blob) {
+                    saveAs(blob, "industry.png");
+                });
+                $("#type_assistance").get(0).toBlob(function(blob) {
+                    saveAs(blob, "type_assistance.png");
+                });
+            });
 
             // Nationality
             var ctx           = document.getElementById("nationality");

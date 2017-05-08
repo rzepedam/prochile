@@ -58,7 +58,7 @@ class UserRequest extends FormRequest
                     'male_surname'          => ['required'],
                     'password'              => ['required', 'confirmed'],
                     'password_confirmation' => ['required'],
-                    'email'                 => ['required', 'email', 'unique:users,email,' . $this->route->parameter('user')]
+                    'email'                 => ['required', 'email', 'unique:users,email,' . request()->route()->id]
                 ];
             }
         }
