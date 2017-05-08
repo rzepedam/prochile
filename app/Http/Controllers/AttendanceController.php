@@ -61,7 +61,7 @@ class AttendanceController extends Controller
     {
         $this->validate($request, [
             'rut'        => ['required'],
-            'created_at' => ['required']
+            'created_at' => ['required', 'unique:attendances,created_at']
         ]);
 
         try

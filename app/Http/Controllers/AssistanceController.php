@@ -213,8 +213,8 @@ class AssistanceController extends Controller
     public function apiUpdatePhotoAssistance(Request $request)
     {
         $this->validate($request, [
-            'rut'   => ['required'],
-            'photo' => ['required'],
+            'rut'        => ['required'],
+            'photo'      => ['required'],
         ]);
 
         try
