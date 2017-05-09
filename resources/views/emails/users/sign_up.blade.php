@@ -20,7 +20,7 @@ Saludos.
 Equipo {{ config('app.name') }}.
 @component('mail::subcopy')
 Si tiene problemas al hacer click en el botón, copie y pegue el siguiente enlace en su navegador
-<a url="{{ '/login' }}" target="_blank">{{ getenv('APP_URL') . '/login' }}</a>
+<a url="{{ '/login' }}" target="_blank">{{ getenv('APP_URL') . '/login' . $user->id . '/edit' }}</a>
 @endcomponent
 
 @endcomponent
