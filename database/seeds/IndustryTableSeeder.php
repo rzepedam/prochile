@@ -36,41 +36,5 @@ class IndustryTableSeeder extends Seeder
             'name'    => 'Servicios para la Ingeniería',
             'acr'     => 'Serv. Ing.'
         ]);
-
-        ProChile\Industry::create([
-            'city_id' => 2,
-            'name'    => 'Alimentos Funcionales y Gourmet',
-            'acr'     => 'Ali. Fun. Gou.'
-        ]);
-
-        ProChile\Industry::create([
-            'city_id' => 2,
-            'name'    => 'Carnes',
-            'acr'     => 'Carnes',
-        ]);
-
-        ProChile\Industry::create([
-            'city_id' => 2,
-            'name'    => 'Madera y máquinas',
-            'acr'     => 'Mad. y Máq.'
-        ]);
-
-        ProChile\Industry::create([
-            'city_id' => 2,
-            'name'    => 'Productos del Mar: pescados, crustáceos, moluscos, algas',
-            'acr'     => 'Prod. Mar'
-        ]);
-
-        ProChile\Industry::create([
-            'city_id' => 2,
-            'name'    => 'Proveedores para el sector Agropecuario y Agroindustrial',
-            'acr'     => 'Prov. Agro. y Agroind.'
-        ]);
-
-        ProChile\Industry::create([
-            'city_id' => 2,
-            'name'    => 'Industria Acuícola',
-            'acr'     => 'Ind. Acuí.'
-        ]);
     }
 }

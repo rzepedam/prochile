@@ -16,9 +16,5 @@ class CityTableSeeder extends Seeder
         ProChile\City::create([
             'name' => 'Antofagasta'
         ]);
-
-        ProChile\City::create([
-            'name' => 'Puerto Varas'
-        ]);
     }
 }
