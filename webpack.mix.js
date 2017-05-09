@@ -55,7 +55,6 @@ mix.options({ processCssUrls: false });
             'node_modules/jquery.rut/jquery.rut.min.js',
             'resources/assets/utilities/valida_rut.js',
             'resources/assets/utilities/valida_email.js',
-            'resources/assets/utilities/change_industries.js'
         ], 'public/js/assistances/create-edit.js');
 
 // Users

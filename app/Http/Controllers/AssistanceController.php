@@ -294,6 +294,7 @@ class AssistanceController extends Controller
         {
             $assistance = $this->assistance->findOrFail($id);
             $this->biometry->delete($assistance);
+            $assistance->attendances()->delete();
             $assistance->delete();
             DB::commit();
 

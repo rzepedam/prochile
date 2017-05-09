@@ -30,6 +30,7 @@ class CreateAssistancesTable extends Migration
             $table->string('email')->unique();
             $table->string('photo')->default('/img/prochile.png');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

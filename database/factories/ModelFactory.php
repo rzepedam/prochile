@@ -5,15 +5,13 @@ $factory->define(ProChile\Assistance::class, function (Faker\Generator $faker)
     $firstName   = $faker->firstName;
     $maleSurname = $faker->lastName;
     $email       = $faker->safeEmail;
-    $city        = rand(1, 2);
-    $industries  = \ProChile\Industry::where('city_id', $city)->get();
 
     return [
         'user_id'            => 1,
         'type_assistance_id' => rand(1, 3),
-        'city_id'            => $city,
+        'city_id'            => 1,
         'company_id'         => factory('ProChile\Company')->create()->id,
-        'industry_id'        => $industries->random()->id,
+        'industry_id'        => rand(1, 4),
         'rut'                => rand(3, 24) . '.' . rand(100, 999) . '.' . rand(100, 999) . '-' . rand(1, 9),
         'first_name'         => $firstName,
         'male_surname'       => $maleSurname,

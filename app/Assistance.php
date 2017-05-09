@@ -6,19 +6,26 @@ use ProChile\Http\Helpers\Helper;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Assistance extends Model
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable, HasApiTokens, SoftDeletes;
 
     /**
      * @var array
      */
-    protected $fillable   = [
+    protected $fillable = [
         'user_id', 'type_assistance_id', 'city_id', 'company_id', 'industry_id', 'first_name',
         'male_surname', 'female_surname', 'is_male', 'country_id', 'rut', 'phone', 'email', 'photo'
     ];
 
+    /**
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
