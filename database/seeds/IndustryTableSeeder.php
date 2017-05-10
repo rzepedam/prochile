@@ -14,27 +14,23 @@ class IndustryTableSeeder extends Seeder
         DB::table('industries')->truncate();
 
         ProChile\Industry::create([
-            'city_id' => 1,
-            'name'    => 'Compañías Mineras',
-            'acr'     => 'Com. Min.'
+            'name'    => 'Alimentos',
+            'acr'     => 'Alim.'
         ]);
 
         ProChile\Industry::create([
-            'city_id' => 1,
-            'name'    => 'Empresas locales proveedoras de la minería',
-            'acr'     => 'Emp. Prov. Min.'
+            'name'    => 'Industria',
+            'acr'     => 'Ind.'
         ]);
 
         ProChile\Industry::create([
-            'city_id' => 1,
-            'name'    => 'Servicios profesionales: Proveedores para la Construcción',
-            'acr'     => 'Serv. Prof.'
+            'name'    => 'Industrias Creativas',
+            'acr'     => 'Ind. Creat.'
         ]);
 
         ProChile\Industry::create([
-            'city_id' => 1,
-            'name'    => 'Servicios para la Ingeniería',
-            'acr'     => 'Serv. Ing.'
+            'name'    => 'Servicios',
+            'acr'     => 'Serv.'
         ]);
     }
 }

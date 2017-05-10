@@ -1,14 +1,4 @@
 <div class="row">
-    {{-- Tipo Asistente select field --}}
-    <div id="typeAssistance" class="col-xs-12 col-sm-4 col-md-4 form-group">
-    	{{ Form::label('type_assistance_id', 'Tipo Asistente') }}
-    	{{ Form::select('type_assistance_id', $typeAssistances, null, ['class' => 'form-control']) }}
-    </div>
-    {{-- Lugar Evento select field --}}
-    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
-    	{{ Form::label('city_id', 'Lugar Evento') }}
-    	{{ Form::select('city_id', $cities, null, ['class' => 'form-control']) }}
-    </div>
     {{-- Empresa select field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
         {{ Form::label('company_id', 'Empresa') }}
@@ -39,6 +29,16 @@
         {{ Form::label('female_surname', 'Apellido Materno') }}
         {{ Form::text('female_surname', null, ['class' => 'form-control']) }}
     </div>
+    {{-- Nacionalidad select field --}}
+    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
+        {{ Form::label('country_id', 'Nacionalidad') }}
+        {{ Form::select('country_id', $countries, null, ['class' => 'form-control']) }}
+    </div>
+    {{-- Teléfono text field --}}
+    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
+        {{ Form::label('phone', 'Teléfono') }}
+        {{ Form::text('phone', null, ['class' => 'form-control']) }}
+    </div>
     <div class="col-xs-12 col-sm-4 col-md-4 form-group margin-0">
         {{ Form::label('is_male', 'Sexo') }}
         <ul class="list-unstyled list-inline text-center">
@@ -65,18 +65,8 @@
             </li>
         </ul>
     </div>
-    {{-- Nacionalidad select field --}}
-    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
-    	{{ Form::label('country_id', 'Nacionalidad') }}
-    	{{ Form::select('country_id', $countries, null, ['class' => 'form-control']) }}
-    </div>
-    {{-- Teléfono text field --}}
-    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
-        {{ Form::label('phone', 'Teléfono') }}
-        {{ Form::text('phone', null, ['class' => 'form-control']) }}
-    </div>
     {{-- Email text field --}}
-    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
+    <div class="col-xs-12 col-sm-6 col-md-6 form-group">
         {{ Form::label('email', 'Email') }}
         {{ Form::text('email', null, ['class' => 'form-control', 'id' => 'email']) }}
     </div>

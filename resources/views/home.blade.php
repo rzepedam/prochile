@@ -24,10 +24,6 @@
         </div>
     </div>
     <div class="row clearfix"><br /><br /><br /></div>
-    <div class="col-xs-12 col-md-offset-3 col-sm-12 col-md-6">
-        <canvas id="type_assistance" height="200"></canvas>
-    </div>
-    <div class="clearfix"></div>
     <buttton id="save-btn" class="btn btn-primary">Export</buttton>
 @stop
 
@@ -180,31 +176,6 @@
                     title: {
                         display: true,
                         text: 'Sector Industrial'
-                    }
-                }
-            });
-
-            // TypeAssistances
-            var ctx5               = document.getElementById("type_assistance");
-            var typeAssistances    = {!! $typeAssistances->keys() !!};
-            var numTypeAssistances = {!! $typeAssistances->values() !!};
-            var colorsTypeAsis     = {!! json_encode(array_slice(config('constants.colors'), 0, $typeAssistances->count())) !!};
-            var bordersTypeAsis    = {!! json_encode(array_slice(config('constants.borders'), 0, $typeAssistances->count())) !!};
-
-            new Chart(ctx5, {
-                type: 'pie',
-                data: {
-                    labels: typeAssistances,
-                    datasets: [{
-                        data: numTypeAssistances,
-                        backgroundColor: colorsTypeAsis,
-                        hoverBackgroundColor: bordersTypeAsis
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Tipo Asistente'
                     }
                 }
             });

@@ -10,15 +10,20 @@ class Company extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'name'
+        'name'
     ];
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @param string $value
      */
-    public function user()
+    public function setNameAttribute($value)
     {
-        return $this->belongsTo(Company::class);
+        $this->attributes['name'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 }

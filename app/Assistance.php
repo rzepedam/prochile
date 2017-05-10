@@ -16,8 +16,8 @@ class Assistance extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'type_assistance_id', 'city_id', 'company_id', 'industry_id', 'first_name',
-        'male_surname', 'female_surname', 'is_male', 'country_id', 'rut', 'phone', 'email', 'photo'
+        'company_id', 'industry_id', 'first_name', 'male_surname', 'female_surname',
+        'is_male', 'country_id', 'rut', 'phone', 'email', 'photo'
     ];
 
     /**
@@ -26,22 +26,6 @@ class Assistance extends Model
     protected $dates = [
         'deleted_at'
     ];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function typeAssistance()
-    {
-        return $this->belongsTo(TypeAssistance::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function city()
-    {
-        return $this->belongsTo(City::class);
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -57,14 +41,6 @@ class Assistance extends Model
     public function industry()
     {
         return $this->belongsTo(Industry::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 
     /**

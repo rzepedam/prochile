@@ -24,11 +24,13 @@
                     <img style="width: 30px; height: 15px;" src="/img/prochile.svg" alt="">
                 </div>
             </li>
-            <li class="{{ (Request::is('/') ? 'active' : '') }}">
-                <a href="{{ url('/') }}">
-                    <i class="fa fa-line-chart" aria-hidden="true"></i> <span class="nav-label">Reportes</span>
-                </a>
-            </li>
+            @if (auth()->user()->role->id != 4)
+                <li class="{{ (Request::is('/') ? 'active' : '') }}">
+                    <a href="{{ url('/') }}">
+                        <i class="fa fa-line-chart" aria-hidden="true"></i> <span class="nav-label">Reportes</span>
+                    </a>
+                </li>
+            @endif
             <li class="{{ (Request::is('assistances') ? 'active' : '') }}">
                 <a href="{{ url('/assistances') }}">
                     <i class="fa fa-street-view" aria-hidden="true"></i> <span class="nav-label">Asistentes</span>

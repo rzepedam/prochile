@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    {{ $companies->links() }}
+    {{-- $companies->links() --}}
 
 @stop
 

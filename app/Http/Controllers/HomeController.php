@@ -57,15 +57,8 @@ class HomeController extends Controller
             ->groupBy('industries.acr')
             ->pluck('count', 'acr');
 
-        $typeAssistances = DB::table('attendances')
-            ->select(DB::raw('COUNT(DISTINCT assistance_id) AS count, type_assistances.name AS name'))
-            ->join('assistances', 'attendances.assistance_id', 'assistances.id')
-            ->join('type_assistances', 'assistances.type_assistance_id', '=', 'type_assistances.id')
-            ->groupBy('type_assistances.name')
-            ->pluck('count', 'name');
-
         return view('home', compact(
-            'nationalities', 'genders', 'lapseTime', 'industries', 'typeAssistances'
+            'nationalities', 'genders', 'lapseTime', 'industries'
         ));
     }
 

@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        AddCityCommand::class, GraphicsEvery15Minutes::class
+        GraphicsEvery15Minutes::class
     ];
 
     /**
