@@ -293,7 +293,7 @@ class AssistanceController extends Controller
                 DB::beginTransaction();
                 foreach ( $reader->get() as $book )
                 {
-                    $assistance = Assistance::create([
+                    Assistance::create([
                         'company_id'     => $book->company_id,
                         'industry_id'    => $book->industry_id,
                         'first_name'     => $book->first_name,
@@ -306,8 +306,6 @@ class AssistanceController extends Controller
                         'email'          => $book->email,
                         'photo'          => '/img/prochile.png'
                     ]);
-
-                    $this->biometry->create($assistance);
                 }
                 DB::commit();
 
