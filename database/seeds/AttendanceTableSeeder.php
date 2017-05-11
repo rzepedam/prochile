@@ -16,12 +16,15 @@ class AttendanceTableSeeder extends Seeder
 
         if ( getenv('APP_ENV') === 'local' || getenv('APP_ENV') === 'production' )
         {
-            $assistances = \ProChile\Assistance::get(['rut']);
-            for ( $i = 0; $i < 207; $i++ )
+            $assistances = \ProChile\Assistance::get(['id', 'rut']);
+
+            foreach ( $assistances as $assistance )
             {
-                factory('ProChile\Attendance')->create([
-                    'id'  => $i + 1,
-                    'rut' => $assistances[ $i ]->rut
+                $date = mt_rand(\Carbon\Carbon::createFromTime('08', '30', '00')->timestamp, \Carbon\Carbon::createFromTime('09', '30', '00')->timestamp);
+                \ProChile\Attendance::create([
+                    'assistance_id' => $assistance->id,
+                    'rut'           => $assistance->rut,
+                    'created_at'    => \Carbon\Carbon::createFromFormat('U', $date)->setTimezone("America/Santiago")
                 ]);
             }
         }

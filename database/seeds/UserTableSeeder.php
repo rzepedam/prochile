@@ -21,5 +21,13 @@ class UserTableSeeder extends Seeder
             'email'        => 'raulmeza@controlqtime.cl',
             'password'     => 'grupo@lfr@12'
         ]);
+
+        \ProChile\User::create([
+            'role_id'      => 1,
+            'first_name'   => 'Roberto',
+            'male_surname' => 'Zepeda',
+            'email'        => 'robertozepeda@controlqtime.cl',
+            'password'     => 'grupo@lfr@12'
+        ]);
     }
 }

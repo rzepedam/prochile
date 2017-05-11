@@ -14,3 +14,4 @@ config/bugsnag.php
 config/excel.php
 resources/assets/js/
 resources/views/vendor/
+
