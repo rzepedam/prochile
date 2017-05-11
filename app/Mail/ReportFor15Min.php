@@ -33,6 +33,7 @@ class ReportFor15Min extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.users.report_for_15_min');
+        return $this->subject('Informativo Enexpro')
+                    ->markdown('emails.users.report_for_15_min');
     }
 }
