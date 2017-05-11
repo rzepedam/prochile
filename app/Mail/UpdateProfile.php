@@ -34,6 +34,7 @@ class UpdateProfile extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.users.update_profile');
+        return $this->subject('Update Profile')
+                    ->markdown('emails.users.update_profile');
     }
 }

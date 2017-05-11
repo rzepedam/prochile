@@ -12,7 +12,7 @@ Contraseña: {{ $password }}
 <br />
 Te sugerimos que cambies la contraseña inmediatamente desde aquí
 @component('mail::button', ['url' =>  getenv('APP_URL') . '/users/' . $user->id . '/edit'])
-Editar Perfil
+Cambiar password
 @endcomponent
 <br />
 Saludos.

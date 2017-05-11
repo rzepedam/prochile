@@ -29,6 +29,7 @@ mix.options({ processCssUrls: false });
     mix.copy('resources/assets/img/header-profile-skin-3.png', 'public/css/patterns');
     mix.copy('resources/assets/img/prochile.svg', 'public/img');
     mix.copy('resources/assets/img/prochile.png', 'public/img');
+    mix.copy('resources/assets/img/controlqtime.png', 'public/img');
     mix.copy([
         'node_modules/bootstrap/fonts',
         'node_modules/font-awesome/fonts',
