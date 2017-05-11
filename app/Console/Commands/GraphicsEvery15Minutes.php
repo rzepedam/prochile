@@ -4,6 +4,7 @@ namespace ProChile\Console\Commands;
 
 use ProChile\User;
 use Illuminate\Console\Command;
+use ProChile\Mail\ReportFor15Min;
 use Illuminate\Support\Facades\Mail;
 
 class GraphicsEvery15Minutes extends Command
@@ -31,6 +32,6 @@ class GraphicsEvery15Minutes extends Command
     {
         $users = User::whereIn('role_id', [1, 2, 3])->get(['email']);
 
-        Mail::to($users)->send(new \ProChile\Mail\ReportFor15Min($users));
+        Mail::to($users)->send(new ReportFor15Min($users));
     }
 }
