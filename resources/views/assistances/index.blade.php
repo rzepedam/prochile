@@ -40,9 +40,10 @@
 
             $('.showModal').on('click', function() {
                 var object = JSON.parse($(this).attr('data-object'));
+                var femaleSurname =  (object['female_surname'] === '') ? '' : object['female_surname'];
 
                 $('#modalImage').attr('src', object['photo']);
-                $('#modalName').text(object['first_name'] + ' ' + object['male_surname'] + ' ' + object['female_surname']);
+                $('#modalName').text(object['first_name'] + ' ' + object['male_surname'] + ' ' + femaleSurname);
                 $('#modalEmail').text(object['email']);
                 $('#modalCompany').text(object['company']['name']);
                 $('#modalIndustry').text(object['industry']['name']);
