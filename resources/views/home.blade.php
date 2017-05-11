@@ -49,9 +49,6 @@
                 $("#industry").get(0).toBlob(function(blob) {
                     saveAs(blob, "industry.png");
                 });
-                $("#type_assistance").get(0).toBlob(function(blob) {
-                    saveAs(blob, "type_assistance.png");
-                });
             });
 
             // Nationality
