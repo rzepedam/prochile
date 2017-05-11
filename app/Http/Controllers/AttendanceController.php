@@ -4,10 +4,10 @@ namespace ProChile\Http\Controllers;
 
 use ProChile\Assistance;
 use ProChile\Attendance;
+use ProChile\Notifications\Welcome;
 use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
-use ProChile\Notifications\WelcomeSMS;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -73,7 +73,7 @@ class AttendanceController extends Controller
             $assistance->attendances()->create($request->all());
             if ( $assistance->attendances->count() == 0 )
             {
-                $assistance->notify(new WelcomeSMS($assistance));
+                $assistance->notify(new Welcome($assistance));
             }
             DB::commit();
 

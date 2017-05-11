@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\NexmoMessage;
 
-class WelcomeSMS extends Notification
+class Welcome extends Notification
 {
     use Queueable;
 
@@ -50,8 +50,8 @@ class WelcomeSMS extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('ProChile le da la mas cordial bienvenida a Enexpro 2017: Encuentro exportador de Chile para el mundo.')
-            ->line('Saludos, Equipo');
+            ->subject('Bienvenido a Enexpro')
+            ->markdown('emails.users.welcome', ['assistance' => $this->assistance]);
     }
 
     /**
