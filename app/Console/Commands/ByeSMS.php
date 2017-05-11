@@ -4,7 +4,7 @@ namespace ProChile\Console\Commands;
 
 use ProChile\Assistance;
 use Illuminate\Console\Command;
-use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Notification;
 
 class ByeSMS extends Command
 {
