@@ -5,6 +5,7 @@ namespace ProChile\Http\Controllers;
 use ProChile\Company;
 use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class CompanyController extends Controller
