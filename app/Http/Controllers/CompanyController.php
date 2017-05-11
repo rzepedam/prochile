@@ -108,14 +108,25 @@ class CompanyController extends Controller
     {
         Excel::load('prochile.csv', function ($reader)
         {
-            foreach ( $reader->get() as $book )
+            try
             {
-                Company::create([
-                    'name'    => $book->company_name,
-                ]);
-            }
+                DB::beginTransaction();
+                foreach ( $reader->get() as $book )
+                {
+                    Company::create([
+                        'name' => $book->company_name,
+                    ]);
+                }
+                DB::commit();
 
-            return true;
+                return response()->json(['status' => true]);
+            } catch ( \Exception $e )
+            {
+                $this->log->error('Error ImportCsv Company: ' . $e->getMessage());
+                DB::rollback();
+
+                return response()->json(['status' => false]);
+            }
         });
     }
 }

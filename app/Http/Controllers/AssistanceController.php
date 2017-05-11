@@ -312,7 +312,7 @@ class AssistanceController extends Controller
                 return response()->json(['status' => true]);
             } catch ( \Exception $e )
             {
-                $this->log->error('Error ImportCsv: ' . $e->getMessage());
+                $this->log->error('Error ImportCsv Assistance: ' . $e->getMessage());
                 DB::rollback();
 
                 return response()->json(['status' => false]);
