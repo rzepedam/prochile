@@ -14,9 +14,16 @@ class AttendanceTableSeeder extends Seeder
     {
         DB::table('attendances')->truncate();
 
-        if ( getenv('APP_ENV') === 'local' || getenv('APP_ENV') === 'production')
+        if ( getenv('APP_ENV') === 'local' || getenv('APP_ENV') === 'production' )
         {
-            factory('ProChile\Attendance', 100)->create();
+            $assistances = \ProChile\Assistance::get(['rut']);
+            for ( $i = 0; $i < 207; $i++ )
+            {
+                factory('ProChile\Attendance')->create([
+                    'id'  => $i + 1,
+                    'rut' => $assistances[ $i ]->rut
+                ]);
+            }
         }
     }
 }

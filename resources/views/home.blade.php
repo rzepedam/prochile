@@ -24,7 +24,9 @@
         </div>
     </div>
     <div class="row clearfix"><br /><br /><br /></div>
-    <buttton id="save-btn" class="btn btn-primary">Export</buttton>
+    @if (auth()->user()->role->id == 1)
+        <buttton id="save-btn" class="btn btn-primary">Export</buttton>
+    @endif
 @stop
 
 @section('scripts')

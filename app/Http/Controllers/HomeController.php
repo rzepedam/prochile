@@ -46,7 +46,7 @@ class HomeController extends Controller
 
         $lapseTime = DB::table('attendances')
             ->select(DB::raw('COUNT(DISTINCT assistance_id) as num'))
-            ->whereRaw("created_at BETWEEN CONCAT(CURDATE(), ' 08:00:00') AND CONCAT(CURDATE(), ' 09:00:00')")
+            ->whereRaw("created_at BETWEEN CONCAT(CURDATE(), ' 08:30:00') AND CONCAT(CURDATE(), ' 09:30:00')")
             ->groupBy(DB::raw('UNIX_TIMESTAMP(created_at) DIV 900'))
             ->pluck('num');
 

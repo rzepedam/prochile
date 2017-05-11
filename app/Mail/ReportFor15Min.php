@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TestSchedule extends Mailable
+class ReportFor15Min extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -33,6 +33,6 @@ class TestSchedule extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.users.test');
+        return $this->markdown('emails.users.report_for_15_min');
     }
 }

@@ -181,6 +181,7 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
         Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        \Eduardokum\LaravelMailAutoEmbed\Providers\LaravelMailAutoEmbedServiceProvider::class,
     ],
 
     /*

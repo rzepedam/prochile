@@ -31,6 +31,6 @@ class GraphicsEvery15Minutes extends Command
     {
         $users = User::whereIn('role_id', [1, 2, 3])->get(['email']);
 
-        Mail::to($users)->send(new \ProChile\Mail\TestSchedule($users));
+        Mail::to($users)->send(new \ProChile\Mail\ReportFor15Min($users));
     }
 }
