@@ -2,7 +2,6 @@
 
 namespace ProChile\Mail;
 
-use ProChile\Assistance;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -20,9 +19,9 @@ class Message8am extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param Assistance $assistances
+     * @param $assistances
      */
-    public function __construct(Assistance $assistances)
+    public function __construct($assistances)
     {
         $this->assistances = $assistances;
     }
