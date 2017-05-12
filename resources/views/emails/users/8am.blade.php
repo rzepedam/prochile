@@ -1,6 +1,6 @@
 @component('mail::message')
 # Buenos días,
-Le recordamos que la acreditación al evento ENEXPRO, se realizará en ala Sur, del 2° piso Hotel Antofagasta a través de la empresa Control QTIME.
+Le recordamos que la acreditación a **ENEXPRO**, se realizará en **ala Sur, del 2° piso Hotel Antofagasta a través de la empresa Control QTIME**.
 <br />
 <br />
 Saludos.
