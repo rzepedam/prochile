@@ -20,7 +20,7 @@ class AttendanceTableSeeder extends Seeder
 
             foreach ( $assistances as $assistance )
             {
-                $date = mt_rand(\Carbon\Carbon::createFromTime('08', '30', '00')->timestamp, \Carbon\Carbon::createFromTime('09', '30', '00')->timestamp);
+                $date = mt_rand(\Carbon\Carbon::createFromTime('08', '00', '00')->timestamp, \Carbon\Carbon::createFromTime('09', '30', '00')->timestamp);
                 \ProChile\Attendance::create([
                     'assistance_id' => $assistance->id,
                     'rut'           => $assistance->rut,

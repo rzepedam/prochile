@@ -102,14 +102,14 @@
 
             // Lapse Time
             var ctx3         = document.getElementById("time_lapse");
-            var lapseTime    = {!! $lapseTime->values() !!};
-            var colorsLapse  = {!! json_encode(array_slice(config('constants.colors'), 0, $lapseTime->count())) !!};
-            var bordersLapse = {!! json_encode(array_slice(config('constants.borders'), 0, $lapseTime->count())) !!};
+            var lapseTime    = {!! $finalLapse->values() !!};
+            var colorsLapse  = {!! json_encode(array_slice(config('constants.colors'), 0, $finalLapse->count())) !!};
+            var bordersLapse = {!! json_encode(array_slice(config('constants.borders'), 0, $finalLapse->count())) !!};
 
             new Chart(ctx3, {
                 type: 'bar',
                 data: {
-                    labels: ["8:00-8:15", "8:15-8:30", "8:30-8:45", "8:45-9:00"],
+                    labels: ["8:00-8:30", "8:30-8:45", "8:45-9:00", "9:00-9:15", "9:15-9:30"],
                     datasets: [
                         {
                             label: "Asistentes",
@@ -134,7 +134,7 @@
                     },
                     title: {
                         display: true,
-                        text: 'Periodos 15 min.'
+                        text: 'Asistencia por Periodos'
                     }
                 }
             });

@@ -44,6 +44,12 @@ class HomeController extends Controller
             ->groupBy('assistances.is_male')
             ->pluck('count');
 
+        $firstLapse = DB::table('attendances')
+            ->select(DB::raw('COUNT(DISTINCT assistance_id) as num'))
+            ->whereRaw("created_at BETWEEN CONCAT(CURDATE(), ' 08:00:00') AND CONCAT(CURDATE(), ' 08:30:00')")
+            ->groupBy(DB::raw('UNIX_TIMESTAMP(created_at) DIV 1800'))
+            ->pluck('num');
+
         $lapseTime = DB::table('attendances')
             ->select(DB::raw('COUNT(DISTINCT assistance_id) as num'))
             ->whereRaw("created_at BETWEEN CONCAT(CURDATE(), ' 08:30:00') AND CONCAT(CURDATE(), ' 09:30:00')")
@@ -57,8 +63,11 @@ class HomeController extends Controller
             ->groupBy('industries.acr')
             ->pluck('count', 'acr');
 
+        // Período 8:00 - 8:30 + lapse de 15 min. hasta 9:30
+        $finalLapse = $firstLapse->merge($lapseTime);
+
         return view('home', compact(
-            'nationalities', 'genders', 'lapseTime', 'industries'
+            'nationalities', 'genders', 'finalLapse', 'industries'
         ));
     }
 
