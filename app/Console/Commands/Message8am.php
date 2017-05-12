@@ -13,7 +13,7 @@ class Message8am extends Command
      *
      * @var string
      */
-    protected $signature = 'add:mail-8-am';
+    protected $signature = 'app:mail-8-am';
 
     /**
      * The console command description.
