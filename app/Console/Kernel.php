@@ -3,6 +3,7 @@
 namespace ProChile\Console;
 
 use ProChile\Console\Commands\ByeSMS;
+use ProChile\Console\Commands\Message8am;
 use Illuminate\Console\Scheduling\Schedule;
 use ProChile\Console\Commands\AddCityCommand;
 use ProChile\Console\Commands\GraphicsEvery15Minutes;
@@ -16,7 +17,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        GraphicsEvery15Minutes::class, ByeSMS::class
+        GraphicsEvery15Minutes::class, ByeSMS::class, Message8am::class
     ];
 
     /**
