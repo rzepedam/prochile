@@ -87,7 +87,7 @@ class UserController extends Controller
         try
         {
             $user = $this->user->create($request->all());
-            Mail::to($user)->queue(new SignUp($password, $user));   // Sending email with credentials...
+            Mail::to($user)->send(new SignUp($password, $user));   // Sending email with credentials...
             DB::commit();
             session()->flash('message', 'El registro fue almacenado satisfactoriamente.');
 
@@ -142,10 +142,11 @@ class UserController extends Controller
         {
             $user = $this->user->with(['role'])->findOrFail($id);
             $user->update($request->all());
-            Mail::to($user)->queue(new UpdateProfile($user));   // Sending email update profile...
+            Mail::to($user)->send(new UpdateProfile($user));   // Sending email update profile...
             DB::commit();
+            session()->flash('message', 'Perfil Actualizado satisfactoriamente.');
 
-            return ['status' => true, 'url' => '/users'];
+            return ['status' => true, 'url' => '/'];
         } catch ( \Exception $e )
         {
             $this->log->error("Error Update User: " . $e->getMessage());

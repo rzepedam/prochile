@@ -1,14 +1,4 @@
 <div class="row">
-    {{-- Tipo Asistente select field --}}
-    <div id="typeAssistance" class="col-xs-12 col-sm-4 col-md-4 form-group">
-    	{{ Form::label('type_assistance_id', 'Tipo Asistente') }}
-    	{{ Form::select('type_assistance_id', $typeAssistances, null, ['class' => 'form-control']) }}
-    </div>
-    {{-- Lugar Evento select field --}}
-    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
-    	{{ Form::label('city_id', 'Lugar Evento') }}
-    	{{ Form::select('city_id', $cities, null, ['class' => 'form-control']) }}
-    </div>
     {{-- Empresa select field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
         {{ Form::label('company_id', 'Empresa') }}
@@ -41,13 +31,39 @@
     </div>
     {{-- Nacionalidad select field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
-    	{{ Form::label('country_id', 'Nacionalidad') }}
-    	{{ Form::select('country_id', $countries, null, ['class' => 'form-control']) }}
+        {{ Form::label('country_id', 'Nacionalidad') }}
+        {{ Form::select('country_id', $countries, null, ['class' => 'form-control']) }}
     </div>
     {{-- Teléfono text field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
         {{ Form::label('phone', 'Teléfono') }}
         {{ Form::text('phone', null, ['class' => 'form-control']) }}
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 form-group margin-0">
+        {{ Form::label('is_male', 'Sexo') }}
+        <ul class="list-unstyled list-inline text-center">
+            <li>
+                <div class="radio-custom radio-primary">
+                    @if (Route::is('assistances.create'))
+                        <input type="radio" id="male" name="is_male" value="1" />
+                    @else
+                        <input type="radio" id="male" name="is_male" value="1" {{ $assistance->is_male ? 'checked' : '' }} />
+                    @endif
+                    <label for="male">Masculino</label>
+                </div>
+            </li>
+            <li></li>
+            <li>
+                <div class="radio-custom radio-primary">
+                    @if (Route::is('assistances.create'))
+                        <input type="radio" id="female" name="is_male" value="0" />
+                    @else
+                        <input type="radio" id="female" name="is_male" value="0" {{ $assistance->is_male ? '' : 'checked' }} />
+                    @endif
+                    <label for="female">Femenino</label>
+                </div>
+            </li>
+        </ul>
     </div>
     {{-- Email text field --}}
     <div class="col-xs-12 col-sm-6 col-md-6 form-group">

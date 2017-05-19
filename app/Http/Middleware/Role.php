@@ -26,6 +26,11 @@ class Role
     {
         if ( $this->hierarchy[ auth()->user()->role->acr ] < $this->hierarchy[ $role ] )
         {
+            if (auth()->user()->role->acr == 'staff')
+            {
+                return redirect()->to('/assistances');
+            }
+
             return abort(404);
         }
 

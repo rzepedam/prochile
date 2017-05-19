@@ -48,14 +48,13 @@ class AssistanceRequest extends FormRequest
     public function rules()
     {
         return [
-            'type_assistance_id' => ['required', 'in:1,2,3'],
-            'city_id'            => ['required', 'exists:cities,id'],
             'company_id'         => ['required', 'exists:companies,id'],
             'industry_id'        => ['required', 'exists:industries,id'],
             'rut'                => ['required', 'unique:assistances,rut'],
             'first_name'         => ['required'],
             'male_surname'       => ['required'],
             'female_surname'     => ['required'],
+            'is_male'            => ['required', 'in:0,1'],
             'country_id'         => ['required', 'exists:countries,id'],
             'phone'              => ['required'],
             'email'              => ['required', 'email', 'unique:assistances,email']

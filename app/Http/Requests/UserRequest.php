@@ -53,12 +53,12 @@ class UserRequest extends FormRequest
             case 'PUT':
             {
                 return [
-                    'role_id'               => ['required', 'in:1,2,3,4'],
+                    'role_id'               => ['required_if:role_id,' . auth()->user()->role->id, 'in:1,2,3,4'],
                     'first_name'            => ['required'],
                     'male_surname'          => ['required'],
                     'password'              => ['required', 'confirmed'],
                     'password_confirmation' => ['required'],
-                    'email'                 => ['required', 'email', 'unique:users,email,' . $this->route->parameter('user')]
+                    'email'                 => ['required', 'email', 'unique:users,email,' . request()->route()->id]
                 ];
             }
         }

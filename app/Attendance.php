@@ -3,9 +3,12 @@
 namespace ProChile;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Attendance extends Model
 {
+    use SoftDeletes;
+
     /**
      * @var array
      */
@@ -21,7 +24,9 @@ class Attendance extends Model
     /**
      * @var array
      */
-    protected $dates = ['created_at'];
+    protected $dates = [
+        'created_at', 'deleted_at'
+    ];
 
 
     /**

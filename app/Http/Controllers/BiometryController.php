@@ -3,15 +3,30 @@
 namespace ProChile\Http\Controllers;
 
 use ProChile\Biometry;
-use Illuminate\Http\Request;
+use ProChile\Assistance;
 
 class BiometryController extends Controller
 {
+    /**
+     * @var Assistance
+     */
+    protected $assistance;
+
+    /**
+     * @var Biometry
+     */
     protected $biometry;
 
-    public function __construct(Biometry $biometry)
+    /**
+     * BiometryController constructor.
+     *
+     * @param Assistance $assistance
+     * @param Biometry $biometry
+     */
+    public function __construct(Assistance $assistance, Biometry $biometry)
     {
-        $this->biometry = $biometry;
+        $this->biometry   = $biometry;
+        $this->assistance = $assistance;
     }
 
     /**

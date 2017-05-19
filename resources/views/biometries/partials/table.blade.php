@@ -2,20 +2,22 @@
     <table class="table">
         <thead>
             <tr>
+                <th>#</th>
                 <th>Nombre</th>
-                <th>Rut</th>
-                <th class="text-center">Acciones</th>
+                <th class="text-center">Rut</th>
             </tr>
         </thead>
         <tbody>
+            <?php $i = 0; ?>
             @foreach($biometries as $biometry)
-                <tr>
-                    <td>{{ $biometry->first_name . ' ' . $biometry->last_name }}</td>
-                    <td></td>
-                    <td class="text-center">
-                        <a href="">Ver</a>
-                    </td>
-                </tr>
+                @if ($biometry->is_active === 'True')
+                    <tr>
+                        <td>{{ $i + 1 }}</td>
+                        <td>{{ $biometry->first_name . ' ' . $biometry->last_name }}</td>
+                        <td class="text-center">{{ \ProChile\Http\Helpers\Helper::rut($biometry->rut) }}</td>
+                    </tr>
+                    <?php $i ++; ?>
+                @endif
             @endforeach
         </tbody>
     </table>

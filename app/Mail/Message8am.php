@@ -7,23 +7,23 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TestSchedule extends Mailable
+class Message8am extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
-     * @var User
+     * @var Assistance
      */
-    protected $users;
+    protected $assistances;
 
     /**
      * Create a new message instance.
      *
-     * @param $users
+     * @param $assistances
      */
-    public function __construct($users)
+    public function __construct($assistances)
     {
-        $this->users = $users;
+        $this->assistances = $assistances;
     }
 
     /**
@@ -33,6 +33,7 @@ class TestSchedule extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.users.test');
+        return $this->subject('Acreditación Enexpro')
+                    ->markdown('emails.users.8am');
     }
 }

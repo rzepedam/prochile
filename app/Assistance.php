@@ -6,35 +6,26 @@ use ProChile\Http\Helpers\Helper;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Assistance extends Model
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable, HasApiTokens, SoftDeletes;
 
     /**
      * @var array
      */
-    protected $fillable   = [
-        'user_id', 'type_assistance_id', 'city_id', 'company_id', 'industry_id', 'first_name',
-        'male_surname', 'female_surname', 'country_id', 'rut', 'phone', 'email', 'photo'
+    protected $fillable = [
+        'company_id', 'industry_id', 'first_name', 'male_surname', 'female_surname',
+        'is_male', 'country_id', 'rut', 'phone', 'email', 'photo'
     ];
 
-
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @var array
      */
-    public function typeAssistance()
-    {
-        return $this->belongsTo(TypeAssistance::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function city()
-    {
-        return $this->belongsTo(City::class);
-    }
+    protected $dates = [
+        'deleted_at'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -50,14 +41,6 @@ class Assistance extends Model
     public function industry()
     {
         return $this->belongsTo(Industry::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 
     /**
@@ -117,6 +100,21 @@ class Assistance extends Model
     public function setRutAttribute($value)
     {
         $this->attributes['rut'] = str_replace('.', '', $value);
+    }
+
+    /**
+     * @param $value '0 or 1'
+     *
+     * @return bool
+     */
+    public function setIsMaleAttribute($value)
+    {
+        if ( $value === '1' )
+        {
+            return $this->attributes['is_male'] = true;
+        }
+
+        return $this->attributes['is_male'] = false;
     }
 
     /**

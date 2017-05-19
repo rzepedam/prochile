@@ -18,10 +18,6 @@ class CountryTableSeeder extends Seeder
         ]);
 
         ProChile\Country::create([
-            'name' => 'Bolivia'
-        ]);
-
-        ProChile\Country::create([
             'name' => 'Chile'
         ]);
 
@@ -30,11 +26,11 @@ class CountryTableSeeder extends Seeder
         ]);
 
         ProChile\Country::create([
-            'name' => 'Ecuador'
+            'name' => 'España'
         ]);
 
         ProChile\Country::create([
-            'name' => 'Paraguay'
+            'name' => 'Holanda'
         ]);
 
         ProChile\Country::create([
@@ -42,11 +38,7 @@ class CountryTableSeeder extends Seeder
         ]);
 
         ProChile\Country::create([
-            'name' => 'Uruguay'
-        ]);
-
-        ProChile\Country::create([
-            'name' => 'Venezuela'
+            'name' => 'Otra'
         ]);
     }
 }

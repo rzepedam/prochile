@@ -1,9 +1,11 @@
 <div class="row">
-    {{-- Rol select field --}}
-    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
-    	{{ Form::label('role_id', 'Rol') }}
-    	{{ Form::select('role_id', $roles, null, ['class' => 'form-control']) }}
-    </div>
+    @if (auth()->user()->role->id == 1)
+        {{-- Rol select field --}}
+        <div class="col-xs-12 col-sm-4 col-md-4 form-group">
+            {{ Form::label('role_id', 'Rol') }}
+            {{ Form::select('role_id', $roles, null, ['class' => 'form-control']) }}
+        </div>
+    @endif
     {{-- Primer Nombre text field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
     	{{ Form::label('first_name', 'Primer Nombre') }}

@@ -28,9 +28,11 @@
             <br />
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{ route('users.index') }}">
-                        <i class="fa fa-mail-reply"></i> Volver
-                    </a>
+                    @if (auth()->user()->role->id == 1)
+                        <a href="{{ route('users.index') }}">
+                            <i class="fa fa-mail-reply"></i> Volver
+                        </a>
+                    @endif
                     <div id="spinner" class="sk-spinner sk-spinner-double-bounce hide pull-right">
                         <div class="sk-double-bounce1"></div>
                         <div class="sk-double-bounce2"></div>

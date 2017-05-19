@@ -1,6 +1,6 @@
 @component('mail::message')
 # {{ $user->name }}
-Tu perfil ha sido actualizado satisfactoriamente.
+Hola, te informamos que tu perfil ha sido actualizado satisfactoriamente.
 <br />
 <br />
 Saludos.

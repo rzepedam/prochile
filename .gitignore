@@ -9,4 +9,10 @@
 public/mix-manifest.json
 storage/oauth-private.key
 storage/oauth-public.key
-!/resources/views/attendances/index.blade.php
+public/prochile.csv
+config/bugsnag.php
+config/excel.php
+resources/assets/js/
+resources/.DS_Store
+resources/assets/.DS_Store
+

@@ -29,6 +29,7 @@ mix.options({ processCssUrls: false });
     mix.copy('resources/assets/img/header-profile-skin-3.png', 'public/css/patterns');
     mix.copy('resources/assets/img/prochile.svg', 'public/img');
     mix.copy('resources/assets/img/prochile.png', 'public/img');
+    mix.copy('resources/assets/img/controlqtime.png', 'public/img');
     mix.copy([
         'node_modules/bootstrap/fonts',
         'node_modules/font-awesome/fonts',
@@ -43,14 +44,11 @@ mix.options({ processCssUrls: false });
     ], 'public/js/index.js');
 
 // Reports
-    mix.scripts([
-        'node_modules/chart.js/dist/Chart.min.js',
-        'resources/assets/reports/nationality.js',
-        'resources/assets/reports/time_lapse.js',
-        'resources/assets/reports/gender.js',
-        'resources/assets/reports/industry.js',
-        'resources/assets/reports/type_assistance.js',
-    ], 'public/js/reports.js')
+    mix.copy('resources/assets/utilities/canvas-toBlob.js', 'public/js/canvas-toBlob.js')
+        .scripts([
+            'node_modules/chart.js/dist/Chart.min.js',
+            'node_modules/file-saver/FileSaver.min.js'
+        ], 'public/js/reports.js')
 
 // Assistances
     // Create-Edit
@@ -58,7 +56,6 @@ mix.options({ processCssUrls: false });
             'node_modules/jquery.rut/jquery.rut.min.js',
             'resources/assets/utilities/valida_rut.js',
             'resources/assets/utilities/valida_email.js',
-            'resources/assets/utilities/change_industries.js'
         ], 'public/js/assistances/create-edit.js');
 
 // Users

@@ -5,6 +5,8 @@ namespace ProChile\Http\Controllers;
 use ProChile\Company;
 use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CompanyController extends Controller
 {
@@ -37,7 +39,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = $this->company->orderBy('created_at', 'DESC')->paginate(10);
+        $companies = $this->company->orderBy('name')->get();
 
         return view('companies.index', compact('companies'));
     }
@@ -101,5 +103,31 @@ class CompanyController extends Controller
 
             return response()->json(['status' => false]);
         }
+    }
+
+    public function importCsv()
+    {
+        Excel::load('prochile.csv', function ($reader)
+        {
+            try
+            {
+                DB::beginTransaction();
+                foreach ( $reader->get() as $book )
+                {
+                    Company::create([
+                        'name' => $book->company_name,
+                    ]);
+                }
+                DB::commit();
+
+                return response()->json(['status' => true]);
+            } catch ( \Exception $e )
+            {
+                $this->log->error('Error ImportCsv Company: ' . $e->getMessage());
+                DB::rollback();
+
+                return response()->json(['status' => false]);
+            }
+        });
     }
 }

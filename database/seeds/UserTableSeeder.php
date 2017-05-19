@@ -15,11 +15,18 @@ class UserTableSeeder extends Seeder
         DB::table('users')->truncate();
 
         \ProChile\User::create([
-            'user_id'      => 1,
             'role_id'      => 1,
             'first_name'   => 'Raúl',
             'male_surname' => 'Meza',
             'email'        => 'raulmeza@controlqtime.cl',
+            'password'     => 'grupo@lfr@12'
+        ]);
+
+        \ProChile\User::create([
+            'role_id'      => 1,
+            'first_name'   => 'Roberto',
+            'male_surname' => 'Zepeda',
+            'email'        => 'robertozepeda@controlqtime.cl',
             'password'     => 'grupo@lfr@12'
         ]);
     }

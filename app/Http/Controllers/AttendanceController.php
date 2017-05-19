@@ -4,8 +4,10 @@ namespace ProChile\Http\Controllers;
 
 use ProChile\Assistance;
 use ProChile\Attendance;
+use ProChile\Notifications\Welcome;
 use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -61,18 +63,25 @@ class AttendanceController extends Controller
     {
         $this->validate($request, [
             'rut'        => ['required'],
-            'created_at' => ['required']
+            'created_at' => ['required', 'unique:attendances,created_at']
         ]);
 
+        DB::beginTransaction();
         try
         {
-            $assistance = $this->assistance->whereRut($request->get('rut'))->firstOrFail();
+            $assistance = $this->assistance->with(['attendances'])->whereRut($request->get('rut'))->firstOrFail();
             $assistance->attendances()->create($request->all());
+            if ( $assistance->attendances->count() == 0 )
+            {
+                $assistance->notify(new Welcome($assistance));
+            }
+            DB::commit();
 
             return response()->json(['created' => 'Resource created successfully'], 201);
         } catch ( \Exception $e )
         {
             $this->log->error("Error Store Attendance: " . $e->getMessage());
+            DB::rollback();
             if ( $e instanceof ModelNotFoundException )
             {
                 $e = new NotFoundHttpException($e->getMessage(), $e);

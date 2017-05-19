@@ -2,25 +2,25 @@
 
 namespace ProChile\Console\Commands;
 
-use Carbon\Carbon;
-use ProChile\City;
+use ProChile\Assistance;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Notification;
 
-class AddCityCommand extends Command
+class ByeSMS extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:add-city';
+    protected $signature = 'app:bye-sms';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Add a new City';
+    protected $description = 'Send sms at 18:45 hrs.';
 
     /**
      * Execute the console command.
@@ -29,8 +29,8 @@ class AddCityCommand extends Command
      */
     public function handle()
     {
-        City::create([
-            'name' => "New City is added at: " . Carbon::now()
-        ]);
+        $assistances = Assistance::all();
+
+        Notification::send($assistances, new \ProChile\Notifications\ByeSMS());
     }
 }

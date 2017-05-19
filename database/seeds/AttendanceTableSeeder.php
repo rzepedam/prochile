@@ -14,9 +14,19 @@ class AttendanceTableSeeder extends Seeder
     {
         DB::table('attendances')->truncate();
 
-        if ( getenv('APP_ENV') === 'local' )
+        if ( getenv('APP_ENV') === 'local' || getenv('APP_ENV') === 'production' )
         {
-            factory('ProChile\Attendance', 100)->create();
+            $assistances = \ProChile\Assistance::get(['id', 'rut']);
+
+            foreach ( $assistances as $assistance )
+            {
+                $date = mt_rand(\Carbon\Carbon::createFromTime('08', '00', '00')->timestamp, \Carbon\Carbon::createFromTime('09', '30', '00')->timestamp);
+                \ProChile\Attendance::create([
+                    'assistance_id' => $assistance->id,
+                    'rut'           => $assistance->rut,
+                    'created_at'    => \Carbon\Carbon::createFromFormat('U', $date)->setTimezone("America/Santiago")
+                ]);
+            }
         }
     }
 }
