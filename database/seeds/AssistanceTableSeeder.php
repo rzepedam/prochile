@@ -13,9 +13,6 @@ class AssistanceTableSeeder extends Seeder
     {
         DB::table('assistances')->truncate();
 
-        if ( getenv('APP_ENV') === 'local')
-        {
-            factory('ProChile\Assistance', 10)->create();
-        }
+		factory('ProChile\Assistance', 10)->create();
     }
 }
