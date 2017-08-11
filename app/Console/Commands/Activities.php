@@ -30,7 +30,7 @@ class Activities extends Command
      */
     public function handle()
     {
-        $assistances = Assistance::whereRut('17032680-6');
+        $assistances = Assistance::whereRut('17032680-6')->firstOrFail();
 
         Mail::to($assistances)->send(new Activity($assistances));
     }
