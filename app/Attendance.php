@@ -39,6 +39,14 @@ class Attendance extends Model
 
 
     /**
+     * @param $value
+     */
+    public function setRutAttribute($value)
+    {
+        $this->attributes['rut'] = str_replace('.', '', $value);
+    }
+
+    /**
      * @return mixed '23-09-2001'
      */
     public function getDateAttribute()
