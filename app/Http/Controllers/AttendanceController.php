@@ -71,7 +71,9 @@ class AttendanceController extends Controller
         {
             $assistance = $this->assistance->with(['attendances'])->whereRut($request->get('rut'))->firstOrFail();
             $assistance->attendances()->create($request->all());
-            if ( $assistance->attendances->count() == 1 )
+
+            // With first mark, send sms and mail
+            if ( $assistance->attendances->count() == 0 )
             {
                 $assistance->notify(new Welcome($assistance));
             }
