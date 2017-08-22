@@ -73,7 +73,7 @@ class AttendanceController extends Controller
             $assistance->attendances()->create($request->all());
             if ( $assistance->attendances->count() == 0 )
             {
-                $assistance->notify(new Welcome($assistance));
+                // $assistance->notify(new Welcome($assistance));
             }
             DB::commit();
 
