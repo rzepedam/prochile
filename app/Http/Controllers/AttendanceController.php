@@ -71,9 +71,9 @@ class AttendanceController extends Controller
         {
             $assistance = $this->assistance->with(['attendances'])->whereRut($request->get('rut'))->firstOrFail();
             $assistance->attendances()->create($request->all());
-            if ( $assistance->attendances->count() == 0 )
+            if ( $assistance->attendances->count() == 1 )
             {
-                // $assistance->notify(new Welcome($assistance));
+                $assistance->notify(new Welcome($assistance));
             }
             DB::commit();
 
