@@ -59,6 +59,6 @@ class Attendance extends Model
      */
     public function getHourAttribute()
     {
-        return $this->created_at->format('h:i:s');
+        return $this->created_at->format('H:i:s');
     }
 }
