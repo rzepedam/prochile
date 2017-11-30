@@ -18,7 +18,7 @@ class CreateAttendancesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('assistance_id');
             $table->string('rut');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
             $table->softDeletes();
         });
     }
